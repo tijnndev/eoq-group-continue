@@ -28,7 +28,7 @@ function DesktopApp({ app_name, in_docker, isActive, onClick }) {
       className="app-icon appPadding flex flexColumn gap1rem" 
       onClick={app_name == 'cmd' ? () => {onClick()} : () => {setImage()}}
     >
-      <img src={`/public/app_img_${appData}.jpg`} alt={` /public/app_img_${appData}.jpg`} />
+      <img src={`app_img_${appData}.jpg`} alt={`app_img_${appData}.jpg`} />
       {!in_docker && <p>{appData}</p>}
     </div>
   );

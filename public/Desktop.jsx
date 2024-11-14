@@ -43,7 +43,7 @@ function Desktop({ apps }) {
             return <DesktopApp key={app_name} app_name={app_name} in_docker={false} isActive={false} onClick={() => handleAppClick(app_name)}  />
         })}
 
-        <img onDragStart={preventDragHandler} style={background_style} src={`/public/${backgroundPicture}.jpg`} alt="" />
+        <img onDragStart={preventDragHandler} style={background_style} src={`${backgroundPicture}.jpg`} alt="" />
         {isCommandLineOpen && <CommandLine onClose={() => handleAppClick('cmd')} />}
     </div>
   )

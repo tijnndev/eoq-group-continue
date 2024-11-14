@@ -15,19 +15,19 @@ function LoginScreen({ setLoggedIn }) {
 
   return (
     <div className="login-screen">
-      <div class="window">
-        <div class="logo">
-          <p class="top">Microsoft</p>
-          <p class="mid">
+      <div className="window">
+        <div className="logo">
+          <p className="top">Microsoft</p>
+          <p className="mid">
             Windows<span>XP</span>
           </p>
-          <p class="bottom">Professional</p>
+          <p className="bottom">Professional</p>
         </div>
         {loading ? (
-          <div class="container">
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
+          <div className="container">
+            <div className="box"></div>
+            <div className="box"></div>
+            <div className="box"></div>
           </div>
         ) : (
           <button className="old-btn" onClick={handleLogin}>Start game</button>
