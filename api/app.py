@@ -18,7 +18,6 @@ def chat():
         model='llama3.2',
         messages=messages
     )
-
     response_content = response['message']['content']
     return jsonify({'response': response_content})
 
