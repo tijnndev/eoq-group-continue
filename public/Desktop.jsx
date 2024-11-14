@@ -8,13 +8,30 @@ function Desktop() {
         setBackgroundPicture('default_bg')
     })
 
+    const apps = ['firefox', 'bin', 'cmd', 'sizer', 'documents']
+
+    const preventDragHandler = (e) => {
+        e.preventDefault();
+      }
+      
+
+    const background_style = {
+        position: 'absolute',
+        height: '100dvh',
+        width: '100dvw',
+        top: 0,
+        left: 0,
+        zIndex: '-1' 
+
+    }
+
   return (
     <div className='Desktop'>
-        <img src={`/public/${backgroundPicture}.jpg`} alt="" />
-        <DesktopApp 
-            app_name='firefox'
-            in_docker={false}
-            />
+        {apps.map((app_name) =>{ 
+            return <DesktopApp app_name={app_name} in_docker={false} isActive={false}/>
+        })}
+
+        <img onDragStart={preventDragHandler} style={background_style} src={`/public/${backgroundPicture}.jpg`} alt="" />
     </div>
   )
 }
