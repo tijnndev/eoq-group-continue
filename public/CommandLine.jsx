@@ -116,6 +116,8 @@ function CommandLine({ onClose }) {
   };
 
   return (
+    <>
+    {showImage && <img className='franks-endscreen' src={`frank-scare.jpg`}/>}
     <div className="command-line-window">
       <div className="command-line-header">
         <span>Command Line</span>
@@ -134,6 +136,7 @@ function CommandLine({ onClose }) {
         />
       </div>
     </div>
+    </>
   );
 }
 
