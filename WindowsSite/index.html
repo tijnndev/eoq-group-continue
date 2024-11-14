@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows-Style Desktop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="mode-buttons">
+        <button data-mode="small">Small (50x50)</button>
+        <button data-mode="medium">Medium (100x100)</button>
+        <button data-mode="large">Large (200x200)</button>
+      </div>
+      
+      <div class="desktop" id="desktop">
+        <div class="app-icon medium" id="icon1" draggable="true" >
+          <img src="app1-icon.png" alt="App 1">
+          <p>App 1</p>
+        </div>
+        <div class="app-icon medium" id="icon2" draggable="true" onclick="openApp()" >
+          <img src="./assets/img/image.png" alt="App 2">
+          <p>App 2</p>
+        </div>
+        <div class="app-icon medium" id="icon3" draggable="true"  >
+          <img src="app3-icon.png" alt="App 3">
+          <p>App 3</p>
+        </div>
+      </div>
+
+  <div id="appWindow" class="app-window" style="display: none;">
+    <div class="app-header">
+      <span id="appTitle">Command Prompt</span>
+      <button onclick="closeApp()">X</button>
+    </div>
+    <div class="app-content" id="cmdOutput">
+      <!-- Command line output will go here -->
+    </div>
+    <div class="app-input">
+      <input type="text" id="cmdInput" placeholder="Enter command" onkeydown="handleCommand(event)">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
