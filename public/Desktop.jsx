@@ -1,14 +1,13 @@
 import React from 'react'
-
+import App from '../src/App'
+import DesktopApp from './DesktopApp'
 function Desktop() {
   return (
-<<<<<<< HEAD
-    <div className="desktop">
-        
+    <div className='Desktop'>
+        <DesktopApp 
+            app_name='firefox'
+            />
     </div>
-=======
-    <div>Desktop</div>
->>>>>>> c05071c455b43b542edd1be2321098dbff95929d
   )
 }
 
