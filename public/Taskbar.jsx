@@ -52,7 +52,7 @@ function Taskbar() {
       <div className="taskbar-apps"></div>
       <div className="taskbar-clock">{formattedTime}</div>
 
-      {isCommandLineOpen && <CommandLine onClose={handleCommandLineClose} />}
+      {isCommandLineOpen && <CommandLine onClose={() => handleAppClick('cmd')} />}
     </div>
   );
 }
