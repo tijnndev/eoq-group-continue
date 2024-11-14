@@ -24,7 +24,7 @@ function Desktop({ apps }) {
   return (
     <div className='Desktop'>
         {apps.map((app_name) =>{ 
-            return <DesktopApp app_name={app_name} in_docker={false} isActive={false}/>
+            return <DesktopApp app_name={app_name} in_docker={false} isActive={false} key={app_name}/>
         })}
 
         <img onDragStart={preventDragHandler} style={background_style} src={`/public/${backgroundPicture}.jpg`} alt="" />
