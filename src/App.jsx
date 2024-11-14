@@ -4,7 +4,7 @@ import Desktop from '../public/Desktop'
 import './App.css'
 
 function App() {
-  const apps = ['firefox', 'bin', 'cmd', 'sizer', 'documents']
+  const apps = ['firefox', 'bin', 'cmd', 'documents']
 
   return (
     <>

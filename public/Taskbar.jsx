@@ -6,7 +6,7 @@ function Taskbar() {
   const [activeApp, setActiveApp] = useState(null);
   const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
 
-  const apps = ['windowsce', 'cmd', 'firefox', 'bin', 'sizer', 'documents'];
+  const apps = ['windowsce', 'cmd', 'firefox', 'bin', 'documents'];
 
   useEffect(() => { 
     const timer = setInterval(() => setTime(new Date()), 1000);

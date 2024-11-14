@@ -3,7 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
-.desktop {
+.Desktop {
   width: 100dvw;
   height: 100dvh;
   display: flex;
@@ -12,6 +12,9 @@
   gap: 1rem;
   padding: 1rem;
 }
+.Desktop > * {
+  border: None;
+}
 body {
   overflow: hidden;
 }
@@ -19,4 +22,5 @@ body {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  gap: 1rem;
 }
