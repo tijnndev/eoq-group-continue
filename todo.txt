@@ -7,5 +7,4 @@
 
 # Could do:
 - Shutdown page
-- Startup page
 - Windows Main Context Menu
