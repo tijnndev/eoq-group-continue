@@ -5,9 +5,8 @@ function CommandLine({ onClose }) {
   const [cmdOutput, setCmdOutput] = useState([]);
   const [prefix, setPrefix] = useState('C:\\>');
   const [showImage, setShowImage] = useState(false);
-  console.log(cmdOutput);
+  const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
   
-
   useEffect(() => {
     insertLine(`${prefix} Welcome to the FAO (Frank's Alcoholic Oracle)`);
     insertLine(`${prefix} Type "name" to set your name.`);
@@ -36,7 +35,7 @@ function CommandLine({ onClose }) {
     insertLine(`${prefix} ${command}`);
     
     if (command === 'help') {
-      insertLine('Available commands: help, clear, date, name <your name>, frank, rm');
+      insertLine('Available commands: help, clear, date, name <your name>, frank, rm, hello');
     } else if (command === 'clear') {
       setCmdOutput([]);
       insertLine(`${prefix} Welcome to the FAO (Frank's Alcoholic Oracle)`);
@@ -58,15 +57,15 @@ function CommandLine({ onClose }) {
     } else if (command === 'frank') {
       insertLine('******################*=:::::::::::::-====-::.+%%%%%%%%%...');
     } else {
-      // Handle API request for other commands
       await fetchResponseFromAPI(command);
     }
   };
 
   const fetchResponseFromAPI = async (command) => {
+    setIsLoading(true); // Set loading to true when starting
     try {
       const messages = [
-        { role: 'system', content: "You are Frank, the Alcoholic Oracle, always in character." },
+        { role: 'system', content: "You are Frank, the Alcoholic Oracle, you became an alcoholic since leaving university as a teacher and now you just travel into computers of your former students, always in character." },
         { role: 'user', content: command }
       ];
 
@@ -83,6 +82,8 @@ function CommandLine({ onClose }) {
     } catch (error) {
       console.error('Error fetching from API:', error);
       insertLine(`'${command}' is not recognized as a command.`);
+    } finally {
+      setIsLoading(false); // Set loading to false when done
     }
   };
 
@@ -96,6 +97,7 @@ function CommandLine({ onClose }) {
         </div>
         <div className="command-line-content" id="cmdOutput">
           {cmdOutput}
+          {isLoading && <p>Loading...</p>} {/* Show loading indicator */}
         </div>  
         <div className="command-line-input">
           <input
@@ -104,6 +106,7 @@ function CommandLine({ onClose }) {
             onChange={handleInputChange}
             onKeyDown={handleInputSubmit}
             placeholder="Enter command..."
+            disabled={isLoading}
           />
         </div>
       </div>
