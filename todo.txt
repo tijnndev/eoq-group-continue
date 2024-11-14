@@ -3,6 +3,7 @@
 - Windows XP Ear-rape
 
 - Be more specific in AI parameters
+  - Enter tips to the AI to give when the user is stuck
 
 # Could do:
 - Shutdown page
