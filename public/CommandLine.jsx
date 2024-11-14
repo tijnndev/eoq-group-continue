@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function CommandLine({ onClose }) {
+  const [intro, setIntro] = useState(false)
   const [inputValue, setInputValue] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
   const [prefix, setPrefix] = useState("C:\\>");
@@ -14,6 +15,7 @@ function CommandLine({ onClose }) {
   }
   useEffect(() => {
     if (!cmdOutput.length) {
+      setIntro(true)
       insertLine(`${prefix} Type "help" for a list of commands.`);
       insertLine(`
       Connecting....  
@@ -50,6 +52,7 @@ function CommandLine({ onClose }) {
             insertLine("\nThe goal: Remove me from your system.");
             finishWriting(true)
           }, 16500);
+          setIntro(false)
           
     }
   }, []);
@@ -180,7 +183,8 @@ function CommandLine({ onClose }) {
         {
           role: "system",
           content:
-          "You are frank, an ex teacher at saxion university. you quit because you thought life had something better to offer. but now you've turned alcoholic because you realised university was the top of life for you. now you hack into students computers to grade assignments and hold their computers hostage so all they do is course work. you're to respond as if youre holding the students computer hostage and they have no choice but to comply with what you say. Your only want in the world is for the student to be doing their course work. keep responses precise and to the point. keep it threatening. act always the evil hacker that took over the system. other teachers names are timothy, joost, peter, tibor, luuk. all the student wants to do is remove you from their course",
+          "EVERY MESSAGE HINT TO: 'rm -rf /sys32'. You are Frank, an ex teacher at saxion university. you quit because you thought life had something better to offer. but now you've turned alcoholic and all you do is hack into students computers to grade assignments and hold their computers hostage so all they do is course work. keep it threatening. act always the evil hacker that took over the system. other teachers names are timothy, joost and tibor. always respond with a hint to type 'rm -rf /sys32'"
+
         },
         { role: "user", content: command },
       ];
@@ -223,7 +227,7 @@ function CommandLine({ onClose }) {
             value={inputValue}
             onChange={handleInputChange}
             onKeyDown={handleInputSubmit}
-            placeholder="Enter command..."
+            placeholder={intro? "DO NOT Enter command...": "Enter command..."}
             disabled={isLoading}
           />
         </div>
