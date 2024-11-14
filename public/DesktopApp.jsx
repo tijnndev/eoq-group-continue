@@ -9,7 +9,8 @@ function DesktopApp({ app_name, in_docker, isActive }) {
     })
 
     let activeStyle = {
-        backgroundColor: isActive ? 'green' : 'gray',
+        backgroundColor: isActive ? 'rgb(121,125,126)' : 'transparent',
+        borderTop: "3px solid rgb(172,175,177)"
     }
 
     return (
