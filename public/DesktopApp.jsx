@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 
 
-function DesktopApp({ app_name }) {
+function DesktopApp({ app_name, in_docker }) {
     const [appData, setAppData] = useState('')
     useEffect(() => {
         setAppData(app_name)
@@ -11,8 +11,8 @@ function DesktopApp({ app_name }) {
     return (
         <div className="appPadding flex flexColumn gap1rem">
             <img src={`/public/app_img_${appData}.jpg`} alt={` /public/app_img_${appData}.jpg`} />
-            {in_docker &&
-            <p>{appData}.jpg</p>            }
+            {!in_docker &&
+            <p>{appData}</p>}
         </div>
     )
 }
