@@ -30,10 +30,6 @@ function Taskbar() {
     setIsCommandLineOpen(prevState => !prevState);
   };
 
-  const handleCommandLineClose = () => {
-    setIsCommandLineOpen(false);
-  };
-
   return (
     <div className="taskbar">
       <div className="taskbar-start">

@@ -1,12 +1,27 @@
 import React from 'react'
 import App from '../src/App'
 import DesktopApp from './DesktopApp'
+import CommandLine from './CommandLine'
 import { useState, useEffect } from 'react'
 function Desktop({ apps }) {
     const [backgroundPicture, setBackgroundPicture] = useState('default_bg')
+    const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
+    const [activeApp, setActiveApp] = useState(null);
+
     useEffect(() => {
         setBackgroundPicture('default_bg')
     })
+
+    const handleAppClick = (appName) => {
+        if (appName === "cmd") {
+          handleCommandLineToggle();
+        }
+        setActiveApp(prevState => prevState === appName ? null : appName);
+    };
+    
+      const handleCommandLineToggle = () => {
+        setIsCommandLineOpen(prevState => !prevState);
+      };
 
     const preventDragHandler = (e) => {
         e.preventDefault();
@@ -25,10 +40,11 @@ function Desktop({ apps }) {
   return (
     <div className='Desktop'>
         {apps.map((app_name) =>{ 
-            return <DesktopApp key={app_name} app_name={app_name} in_docker={false} isActive={false} />
+            return <DesktopApp key={app_name} app_name={app_name} in_docker={false} isActive={false} onClick={() => handleAppClick(app_name)}  />
         })}
 
         <img onDragStart={preventDragHandler} style={background_style} src={`/public/${backgroundPicture}.jpg`} alt="" />
+        {isCommandLineOpen && <CommandLine onClose={() => handleAppClick('cmd')} />}
     </div>
   )
 }
