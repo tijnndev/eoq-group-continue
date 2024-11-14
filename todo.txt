@@ -1,0 +1,10 @@
+# Must do
+  - Implement the steps of the game
+- Windows XP Ear-rape
+
+- Be more specific in AI parameters
+
+# Could do:
+- Shutdown page
+- Startup page
+- Windows Main Context Menu
