@@ -11,7 +11,8 @@ function DesktopApp({ app_name }) {
     return (
         <div className="appPadding flex flexColumn gap1rem">
             <img src={`/public/app_img_${appData}.jpg`} alt={` /public/app_img_${appData}.jpg`} />
-            <p>{appData}.jpg</p>
+            {in_docker &&
+            <p>{appData}.jpg</p>            }
         </div>
     )
 }
