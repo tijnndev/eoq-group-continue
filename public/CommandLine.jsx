@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 
 function playSound() {
-    const sound = new Audio('public/celebrationtime.mp3');
-    sound.play();
-  }
+  const sound = new Audio('public/celebrationtime.mp3');
+  sound.play();
+}
   
 
 function CommandLine({ onClose }) {
