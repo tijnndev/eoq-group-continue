@@ -15,7 +15,7 @@ function DesktopApp({ app_name, in_docker, isActive }) {
 
     return (
         <div style={activeStyle} className={`app-icon appPadding flex flexColumn gap1rem`}>
-            <img src={`/public/app_img_${appData}.jpg`} alt={` /public/app_img_${appData}.jpg`} />
+            <img src={`/public/app_img_${appData}.jpg`} alt={`/public/app_img_${appData}.jpg`} />
             {!in_docker &&
             <p>{appData}</p>}
         </div>
