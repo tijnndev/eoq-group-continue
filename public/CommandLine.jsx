@@ -3,15 +3,42 @@ import React, { useState, useEffect } from 'react';
 
 function playSound() {
     const sound = new Audio('public/celebrationtime.mp3');
+    sound.volume = 1.0;
     sound.play();
   }
+
   
 
 function CommandLine({ onClose }) {
-  const [inputValue, setInputValue] = useState('');
-  const [cmdOutput, setCmdOutput] = useState([]);
-  const [prefix, setPrefix] = useState('C:\\>');
-  const [showImage, setShowImage] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [cmdOutput, setCmdOutput] = useState([]);
+    const [prefix, setPrefix] = useState('C:\\>');
+    const [showImage, setShowImage] = useState(false);
+    const [messages, setMessages] = useState([]);
+
+    const sendMessage = async () => {
+        if (inputValue.trim() === '') return;
+        const newMessages = [...messages, { role: 'user', content: inputValue }];
+        setMessages(newMessages);
+        try {
+            const response = await fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ messages: newMessages }),
+            });
+            const data = await response.json();
+    
+            if (data.response) {
+                insertLine(`${data.response}`);
+            }
+        } catch (error) {
+            console.error('Error fetching from API:', error);
+        } finally {
+            setInputValue('');
+        }
+    };
 
   useEffect(() => {
     insertLine(`${prefix} Welcome to the FAO (Frank\'s Alcoholic Oracle)`);
@@ -119,7 +146,7 @@ function CommandLine({ onClose }) {
 ##############%%%#+----=========+#%%%%%%%%%@@@%@@%@%%%%%%@@%%%%%%%%%%%#######%%%%%%%%###############
       `, true);
     } else {
-      insertLine(`'${command}' is not recognized as a command.`);
+        sendMessage();
     }
   };
 
