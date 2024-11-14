@@ -1,0 +1,199 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0078D4;
+  margin: 0;
+  overflow: hidden;
+}
+
+.mode-buttons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.desktop {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  padding: 20px;
+  height: 100vh;
+  gap: 20px;
+  box-sizing: border-box;
+  position: relative;
+  align-items: center;
+  justify-items: center;
+}
+.desktop:has(.app-icon.small) {
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+}
+.desktop:has(.app-icon.large) {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.app-icon:has(p) {
+  cursor: pointer;
+}
+
+.app-icon img {
+  border-radius: 8px;
+}
+
+.app-icon p {
+  margin: 5px 0 0;
+  font-size: 0.9em;
+}
+
+.app-icon.small {
+  width: 50px;
+  height: 50px;
+}
+
+.app-icon.small img {
+  width: 40px;
+  height: 40px;
+}
+
+.app-icon.medium {
+  width: 100px;
+  height: 100px;
+}
+
+.app-icon.medium img {
+  width: 75px;
+  height: 75px;
+}
+
+.app-icon.large {
+  width: 150px;
+  height: 150px;
+}
+
+.app-icon.large img {
+  width: 100px;
+  height: 100px;
+}
+
+.app-icon.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+/* App Window Style */
+.app-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 70vh;
+  background-color: #000;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 8px 8px 0 0;
+}
+
+.app-header span {
+  font-weight: bold;
+}
+
+.app-header button {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.app-header button:hover {
+  color: red;
+}
+
+.app-content {
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-bottom: 40px;
+  max-height: 60vh;
+}
+
+/* Scrollbar Styles */
+.app-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+.app-content::-webkit-scrollbar-track {
+  background: #222;
+  border-radius: 10px;
+}
+
+.app-content::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 10px;
+  border: 2px solid #333;
+}
+
+.app-content::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+.app-content::-webkit-scrollbar-thumb:active {
+  background-color: #aaa;
+}
+
+
+.app-input {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  padding: 5px 10px;
+  z-index: 10;
+}
+
+.app-input input {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 16px;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+}
