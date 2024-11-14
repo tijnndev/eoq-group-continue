@@ -2,19 +2,16 @@ import React from 'react'
 import App from '../src/App'
 import DesktopApp from './DesktopApp'
 import { useState, useEffect } from 'react'
-function Desktop() {
+function Desktop({ apps }) {
     const [backgroundPicture, setBackgroundPicture] = useState('default_bg')
     useEffect(() => {
         setBackgroundPicture('default_bg')
     })
 
-    const apps = ['firefox', 'bin', 'cmd', 'sizer', 'documents']
-
     const preventDragHandler = (e) => {
         e.preventDefault();
       }
       
-
     const background_style = {
         position: 'absolute',
         height: '100dvh',

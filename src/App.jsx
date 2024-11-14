@@ -4,10 +4,12 @@ import Desktop from '../public/Desktop'
 import './App.css'
 
 function App() {
+  const apps = ['firefox', 'bin', 'cmd', 'sizer', 'documents']
+
   return (
     <>
-      <Desktop />
-      <Taskbar />
+      <Desktop apps={apps} />
+      <Taskbar apps={apps}/>
     </>
   )
 }
