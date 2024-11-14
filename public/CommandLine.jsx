@@ -5,9 +5,7 @@ function playSound() {
     const sound = new Audio('public/celebrationtime.mp3');
     sound.volume = 1.0;
     sound.play();
-  }
-
-  
+}
 
 function CommandLine({ onClose }) {
     const [inputValue, setInputValue] = useState('');
