@@ -6,7 +6,17 @@
 .desktop {
   width: 100dvw;
   height: 100dvh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
 }
 body {
   overflow: hidden;
+}
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }

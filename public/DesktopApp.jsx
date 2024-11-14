@@ -7,7 +7,13 @@ function DesktopApp({ app_name, in_docker, isActive, onClick }) {
     setAppData(app_name);
   }, [app_name]);
 
-  const activeStyle =  in_docker ? !isActive ? { boxShadow: '2px 2px 0px rgba(0, 0, 0, 0.75)' } : { boxShadow: '-2px -2px 0px rgba(0, 0, 0, 0.75)' } : {boxSizing:'border-box'};
+  const activeStyle =  in_docker ? 
+                    !isActive ? 
+                    { 
+                        boxShadow: '2px 2px 0px rgba(0, 0, 0, 0.75)' } : { 
+                            boxShadow: '-2px -2px 0px rgba(0, 0, 0, 0.75)' } : {
+                                boxSizing: 'border-box'
+                            };
 
   return (
     <div 

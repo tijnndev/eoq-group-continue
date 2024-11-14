@@ -5,10 +5,11 @@ import CommandLine from './CommandLine';
 
 function Desktop({ apps, isCommandLineOpen, onCloseCommandLine }) {
   const [backgroundPicture, setBackgroundPicture] = useState('default_bg');
+  const [commandLineOpen, toggleCommandLine] = useState(false)
   useEffect(() => {
     setBackgroundPicture('default_bg');
   }, []);
-  isCommandLineOpen = false
+
   const preventDragHandler = (e) => {
     e.preventDefault();
   };
@@ -25,12 +26,16 @@ function Desktop({ apps, isCommandLineOpen, onCloseCommandLine }) {
   return (
     <div className='Desktop'>
         {apps.map((app_name) =>{ 
-            return <DesktopApp app_name={app_name} in_docker={false} isActive={false} key={app_name}/>
-        })}
+            return <DesktopApp 
+              app_name={app_name} 
+              in_docker={false} 
+              isActive={false} 
+              key={app_name}/>
+            })}
 
       <img onDragStart={preventDragHandler} style={background_style} src={`/public/${backgroundPicture}.jpg`} alt="" />
       
-      {isCommandLineOpen && <CommandLine onClose={onCloseCommandLine} />}
+      {commandLineOpen && <CommandLine onClose={onCloseCommandLine} />}
     </div>
   );
 }
