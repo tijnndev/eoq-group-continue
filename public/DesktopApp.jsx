@@ -8,9 +8,10 @@ function DesktopApp({ app_name, in_docker, isActive }) {
         setAppData(app_name)
     })
 
+    
+
     let activeStyle = {
         border: "1px solid #000"
-        
     }
 
     return (
