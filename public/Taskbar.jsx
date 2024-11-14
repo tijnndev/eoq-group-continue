@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DesktopApp from './DesktopApp';
+import CommandLine from './CommandLine';
 
 function Taskbar() {
   const [time, setTime] = useState(new Date());
@@ -20,9 +21,17 @@ function Taskbar() {
 
   const handleAppClick = (appName) => {
     if (appName === "cmd") {
-      setIsCommandLineOpen(!isCommandLineOpen);
+      handleCommandLineToggle();
     }
-    setActiveApp(appName);
+    setActiveApp(prevState => prevState === appName ? null : appName);
+  };
+
+  const handleCommandLineToggle = () => {
+    setIsCommandLineOpen(prevState => !prevState);
+  };
+
+  const handleCommandLineClose = () => {
+    setIsCommandLineOpen(false);
   };
 
   return (
@@ -34,14 +43,16 @@ function Taskbar() {
               key={app_name}
               app_name={app_name} 
               in_docker={true} 
-              isActive={activeApp === app_name}
-              onClick={() => handleAppClick(app_name)} // Pass click handler
+              isActive={activeApp === app_name} // Toggle active state based on the app
+              onClick={() => handleAppClick(app_name)} 
             />
           );
         })}
       </div>
       <div className="taskbar-apps"></div>
       <div className="taskbar-clock">{formattedTime}</div>
+
+      {isCommandLineOpen && <CommandLine onClose={handleCommandLineClose} />}
     </div>
   );
 }

@@ -7,7 +7,7 @@ function CommandLine({ onClose }) {
         <span>Command Line</span>
         <button onClick={onClose}>X</button>
       </div>
-      <div class="command-line-content" id="cmdOutput">
+      <div className="command-line-content" id="cmdOutput">
       </div>  
       <div className="command-line-input">
         <input type="text" placeholder="Enter command..." />
