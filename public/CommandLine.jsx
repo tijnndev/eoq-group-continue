@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function CommandLine({ onClose }) {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
-  const [prefix, setPrefix] = useState('C:\\>');
+  const [prefix, setPrefix] = useState("C:\\>");
   const [showImage, setShowImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
-  
+
   useEffect(() => {
-    insertLine(`${prefix} Welcome to the FAO (Frank's Alcoholic Oracle)`);
-    insertLine(`${prefix} Type "name" to set your name.`);
-    insertLine(`${prefix} Type "help" for a list of commands.`);
+    if (!cmdOutput.length) {
+      insertLine(`${prefix} Welcome to the FAO (Frank's Alcoholic Oracle)`);
+      insertLine(`${prefix} Type "name" to set your name.`);
+      insertLine(`${prefix} Type "help" for a list of commands.`);
+    }
   }, []);
 
   const handleInputChange = (e) => {
@@ -18,35 +20,41 @@ function CommandLine({ onClose }) {
   };
 
   const handleInputSubmit = async (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleCommand(inputValue);
-      setInputValue('');
+      setInputValue("");
     }
   };
 
   const insertLine = (text, isAscii = false) => {
     setCmdOutput((prevOutput) => [
       ...prevOutput,
-      isAscii ? <pre key={prevOutput.length}>{text}</pre> : <p key={prevOutput.length}>{text}</p>,
+      isAscii ? (
+        <pre key={prevOutput.length}>{text}</pre>
+      ) : (
+        <p key={prevOutput.length}>{text}</p>
+      ),
     ]);
   };
 
   const handleCommand = async (command) => {
     insertLine(`${prefix} ${command}`);
-    
-    if (command === 'help') {
-      insertLine('Available commands: help, clear, date, name <your name>, frank, rm, hello');
-    } else if (command === 'clear') {
+
+    if (command === "help") {
+      insertLine(
+        "Available commands: help, clear, date, name <your name>, frank, rm, hello"
+      );
+    } else if (command === "clear") {
       setCmdOutput([]);
       insertLine(`${prefix} Welcome to the FAO (Frank's Alcoholic Oracle)`);
       insertLine(`${prefix} Type "name" to set your name.`);
       insertLine(`${prefix} Type "help" for a list of commands.`);
-    } else if (command === 'date') {
+    } else if (command === "date") {
       const currentDate = new Date();
       insertLine(`Current date and time: ${currentDate}`);
-    } else if (command === 'rm -rf /sys32') {
+    } else if (command === "rm -rf /sys32") {
       setShowImage(true);
-    } else if (command.startsWith('name')) {
+    } else if (command.startsWith("name")) {
       const newName = command.slice(5).trim();
       if (newName) {
         setPrefix(`C:\\${newName}>`);
@@ -54,8 +62,67 @@ function CommandLine({ onClose }) {
       } else {
         insertLine(`${prefix} Please provide a name after the "name" command.`);
       }
-    } else if (command === 'frank') {
-      insertLine('******################*=:::::::::::::-====-::.+%%%%%%%%%...');
+    } else if (command === "frank") {
+      insertLine(
+        `
+        ******################*=:::::::::::::-====-::.+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#+:..+%%%%%%%%%%%%*=*##
+        **+####%%%%%%%%%%%#*---::::::::::::::-====-::.:%%%%%%%%###*++***++*#%%%%%%%%#*=..:=%%%%%%%%%%%%#**##
+        **+@%%%%%%%%%%@%=:::---::::--====+++-:====-::::=+#####******+++*#**+++#%%%%%%#=.::=#%%%%%%%%%%%%**##
+        **#%%%%%%%%%*---::::------==+*#%%%#+=-----=------=-=====+****+++++*****%%%%%%#-:::-#%%%%%%%%%%%%####
+        *#*+%%%%#+=------::--===+*#%%%++==--==========+++==========++*++++=+**###%%%%*::::-#%%%%%%%%%%%%####
+        **##%#+-----------==+*##%%%**========+++++++***+++++==========+++++===+*##%%%=:----*%%%%%%%%%%%%%###
+        +=-=-=-------===++*#%%%%%%++=+====+++++++++#**+*++**++===+=====++++++===+####-----=+%%%%%%%%%%%%%###
+        =:+-------==++*#%%%%%%%%*+++=++=+++**+*****#*********++++++==++++++++++++=+*+======+%%%%%%%%%%%%%###
+        -=-=*+==+++#%%%%%%%%%%##+++*+++++**********#********+**+++*++++++******+++++++++++++%%%%%%%%%%%%%###
+        --*##*+*#%%%%%%%%%%%%##+*+*+*+**************************+++*****+=+*********+**+++**#%%%%%%%%%%%%%##
+        ##*##*%%%%%%%%%%%%%%%*+**++************++++++++++++++++++***##****++****************#%%%%%%%%%%%%%##
+        #*++*##%%%%%%%%%%%%%#***+++*+*+***+++++====++========++++++**##***++++**************#%%%%%%%%%%%%%##
+        ##+++##%%%#########*+**+++++++++++++=====================++++******++++***********###%%%%%%%%%%%%%##
+        #=*#+*#%%%%%##%%%%#***+++++++++++======-------===========+++++**+***+==*#############%%%%%%%%%%%%%##
+        #*****#%%%%%%%%%%%#++*++=+++++++========------============++++++++**++++*############%%%%%%%%%%%%%%%
+        #*++=##%%%%%%%%%%#+=+**+++++++============-----===========+++***+++*+++++*###########%%%%%%%%%%%%%%%
+        %#==-%#%%%%%%%%%##++++=+++++++==============---============+++**++++++++++*##########%%%%%%%%%%%%%%%
+        %#===##%%%%%%%%%%#+++==+++++++=========================+++++++***+++*++++++*#########%%%%%%%%%%%%%%%
+        %#+=**+%%%%%%%%%%#*++=++++++++++======================++++++++****++***++++*########%%%%%%%%%%%%%%%%
+        %***#%%%%%%%%%%%%#++==++++++++++++====================++++++++**********++***#%#%##%%%%%%%%%%%%%%%%%
+        %#%%%%%%%%%%%%%%%*++=++++++++++++++++++=+===============+++++++************++++*#%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%#=+++++++++++++++++++===================++++++***********++*****#%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%=+==+++++++++++++++++===================+++++*************++****#%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%*+===++++**+++++++++++============+++++++++++++**********++++****%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%#=====++*++++++++++++===++===+++**********+++=++***************+*%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%*+====+*+++++++++++++++++++***###%####***+++++++++**************%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%+=====++++++++++++++++++**###%%##%##*#**++++++++++++**+++******%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%#======+++++++++++++++***######*%%%#**+++==++++++++++++++*+++*#%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%#=====+++********+++++**#####***#*++++*+++++++++++++++++++++*#%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%#+==+**########**++==+*********++***++====++++++++++++++++**%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%#+=*###%%%%%%%%*++===+++++*****+++++======++++++++++**++*#%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%#=***#%%%%%%%#*+++==++++++++++++++=======+++++++++++***#%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%####%%%%%%%%#+=##%**%%###*=+====+++++++++++++++++++++++++++++++***#%%%%%%%%####%#%%%%%%
+        %%%%%%%###%%%%%####*##%%%%#++*******#**=++=====+++++++++***+++++++++**+++++++******************+++++
+        %%%%%%%%%%%%%%%%%%%##**#%%%%=+=********+-++========++++++****#***+*****+++++++***%%%%#########******
+        %%%%%%%%%%%%%%%%%%%%%##*+#%%%=+*********==+=======+++++++*****###********+++++***%%%%%%#############
+        ##%%%%%%%%%%%%%%%%%%%%##**#%%#==+*******+=+++=+++##**+********####***********++***#%%%%%%%%%%%%%####
+        %%%%%%%%%%%%%%%%%%%%%%%%##*#%%#=+++****#+=+****************####*********************######%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%###%%%*=+****##******#####*********##***********************#%%###*###%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%#%%%%==***#############******++++*+++***********************#%%%%##*****#
+        =%%%%%%%%%%%%%%%%%%%%%%%%%%#%%%%%+=*######**###*****=++=++#*++++************************#%@@%%%###**
+        =+%%%%%%%%%%%%%%%%%%%%%%%%%##%%%%%=+*######%%%*+*+++==+++++=++++***********#*************##%%@@%%%##
+        =-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=++**#######*#****++++++++++**************************###%%%%%%%%
+        ===#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%++++******+****++++******++*****#######*************#####%%%%%%%
+        ====%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#++++*****+=++*****************########*************#####%%###%%
+        ====+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*+++*****++**#*******+++++***##########***********#####%%####%
+        +==+==%%%%%#############%%%%%%%%%%%%%####+++++**********++++++++***#########************#####%%####%
+        =++=++=#################%%%%%%%#%#%%%%%%%%%#+*+******+++**++++****#########************######%######
+        ++++++++#################%%%%##%%%%%%%%%%%%%%#*+++++++++*******###########*************#############
+        +++++++++*###############%%%%%%%%%%%%%%%%%%%%%%%#*++*******#*###########**************##############
+        +++++++++++#############%%%%%%%%%%%%%%%%@@@%%%%%%%#******#####%%######***************###############
+        +**+++++++++****#####%#**#%%%%%%%%%%%%%%@@@@@@%%%%%%%@%%%@@%%%%%%#####**************################
+        *******++****+:-#####=----===%%%%%%%%%%%%%@@@@@%%%%%%%@@@@%%%%%%%######***********##################
+        #**************#%%%*==========+%%%%%%%%%%%@@%@%@@%@%%%%@@@%%%%%%%%%##################%##############
+        ##############%%%#+----=========+#%%%%%%%%%@@@%@@%@%%%%%%@@%%%%%%%%%%%#######%%%%%%%%###############
+              `,
+        true
+      );
     } else {
       await fetchResponseFromAPI(command);
     }
@@ -65,22 +132,26 @@ function CommandLine({ onClose }) {
     setIsLoading(true); // Set loading to true when starting
     try {
       const messages = [
-        { role: 'system', content: "You are Frank, the Alcoholic Oracle, you became an alcoholic since leaving university as a teacher and now you just travel into computers of your former students, always in character." },
-        { role: 'user', content: command }
+        {
+          role: "system",
+          content:
+            "You are Frank, the Alcoholic Oracle, you became an alcoholic since leaving university as a teacher and now you just travel into computers of your former students, always in character.",
+        },
+        { role: "user", content: command },
       ];
 
-      const response = await fetch('http://127.0.0.1:5000/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages }),
       });
-      
+
       const data = await response.json();
       if (data.response) {
         insertLine(`${prefix} ${data.response}`);
       }
     } catch (error) {
-      console.error('Error fetching from API:', error);
+      console.error("Error fetching from API:", error);
       insertLine(`'${command}' is not recognized as a command.`);
     } finally {
       setIsLoading(false); // Set loading to false when done
@@ -89,7 +160,9 @@ function CommandLine({ onClose }) {
 
   return (
     <>
-      {showImage && <img className='franks-endscreen' src={`frank-scare.jpg`} />}
+      {showImage && (
+        <img className="franks-endscreen" src={`frank-scare.jpg`} />
+      )}
       <div className="command-line-window">
         <div className="command-line-header">
           <span>Command Line</span>
@@ -98,7 +171,7 @@ function CommandLine({ onClose }) {
         <div className="command-line-content" id="cmdOutput">
           {cmdOutput}
           {isLoading && <p>Loading...</p>} {/* Show loading indicator */}
-        </div>  
+        </div>
         <div className="command-line-input">
           <input
             type="text"
