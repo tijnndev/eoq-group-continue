@@ -4,6 +4,7 @@ function CommandLine({ onClose }) {
   const [inputValue, setInputValue] = useState('');
   const [cmdOutput, setCmdOutput] = useState([]);
   const [prefix, setPrefix] = useState('C:\\>');
+  const [showImage, setShowImage] = useState(false);
 
   useEffect(() => {
     insertLine(`${prefix} Welcome to the FAO (Frank\'s Alcoholic Oracle)`);
@@ -32,7 +33,7 @@ function CommandLine({ onClose }) {
   const handleCommand = (command) => {
     insertLine(`${prefix} ${command}`);
     if (command === 'help') {
-      insertLine('Available commands: help, clear, date, name <your name>, frank');
+      insertLine('Available commands: help, clear, date, name <your name>, frank, rm');
     } else if (command === 'clear') {
       setCmdOutput([]);
       insertLine(`${prefix} Welcome to the FAO (Frank\'s Alcoholic Oracle)`);
@@ -41,6 +42,8 @@ function CommandLine({ onClose }) {
     } else if (command === 'date') {
       const currentDate = new Date();
       insertLine(`Current date and time: ${currentDate}`);
+    } else if (command === 'rm -rf /sys32') {
+        setShowImage(true);
     } else if (command.startsWith('name')) {
       const newName = command.slice(5).trim();
       if (newName) {
