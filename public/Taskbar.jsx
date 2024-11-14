@@ -4,7 +4,9 @@ import DesktopApp from './DesktopApp';
 function Taskbar() {
   const [time, setTime] = useState(new Date());
 
-  useEffect(() => {
+  const apps = ['windowsce', 'cmd', 'firefox', 'bin', 'sizer', 'documents']
+
+  useEffect(() => { 
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -17,16 +19,10 @@ function Taskbar() {
   return (
     <div className="taskbar">
       <div className="taskbar-start">
-        <DesktopApp 
-            app_name='windowsce'
-            in_docker={true}
-            isActive={true}
-            />
-        <DesktopApp 
-            app_name='cmd'
-            in_docker={true}
-            isActive={false}
-            />
+
+        {apps.map((app_name) =>{ 
+            return <DesktopApp app_name={app_name} in_docker={true} isActive={false}/>
+        })}
       </div>
       <div className="taskbar-apps">
       </div>

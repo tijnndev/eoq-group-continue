@@ -3,9 +3,9 @@
   justify-content: space-between;
   align-items: center;
   background-color: #e7e7e7;
-  padding: 0.4rem 0rem;
+  padding: 0.4rem;
   color: white;
-  height: 42px;
+  height: 52px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -16,7 +16,6 @@
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  margin-left: 12px;
 }
 
 .app-icon {
@@ -27,6 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.75);
 }
 
 .app-icon.active {
@@ -41,4 +41,6 @@
 .taskbar-clock {
   margin-right: 25px;
   font-size: 14px;
+  background-color: #000;
+  padding: .5rem;
 }
