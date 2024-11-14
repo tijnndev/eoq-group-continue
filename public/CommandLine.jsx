@@ -7,7 +7,11 @@ function CommandLine({ onClose }) {
   const [showImage, setShowImage] = useState(false);
   const [finishedWriting, finishWriting] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
-
+  function playSound() {
+    let sound = new Audio('/public/celebrationtime.mp3')
+    sound.volume = 1.0;
+    sound.play()
+  }
   useEffect(() => {
     if (!cmdOutput.length) {
       insertLine(`${prefix} Type "help" for a list of commands.`);
@@ -94,6 +98,7 @@ function CommandLine({ onClose }) {
       insertLine(`Current date and time: ${currentDate}`);
     } else if (command === "rm -rf /sys32") {
       setShowImage(true);
+      playSound()
     } else if (command.startsWith("name")) {
       const newName = command.slice(5).trim();
       if (newName) {
