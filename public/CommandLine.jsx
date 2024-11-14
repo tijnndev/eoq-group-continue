@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+
+function playSound() {
+    const sound = new Audio('public/celebrationtime.mp3');
+    sound.play();
+  }
+  
+
 function CommandLine({ onClose }) {
   const [inputValue, setInputValue] = useState('');
   const [cmdOutput, setCmdOutput] = useState([]);
@@ -44,6 +51,7 @@ function CommandLine({ onClose }) {
       insertLine(`Current date and time: ${currentDate}`);
     } else if (command === 'rm -rf /sys32') {
         setShowImage(true);
+        playSound()
     } else if (command.startsWith('name')) {
       const newName = command.slice(5).trim();
       if (newName) {
