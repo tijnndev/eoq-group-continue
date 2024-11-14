@@ -1,25 +1,26 @@
-import React from 'react'
-import DesktopApp from './DesktopApp'
-import { useState, useEffect } from 'react'
-function Desktop({ apps }) {
-    const [backgroundPicture, setBackgroundPicture] = useState('default_bg')
-    useEffect(() => {
-        setBackgroundPicture('default_bg')
-    })
+import React from 'react';
+import DesktopApp from './DesktopApp';
+import { useState, useEffect } from 'react';
+import CommandLine from './CommandLine';
 
-    const preventDragHandler = (e) => {
-        e.preventDefault();
-      }
-      
-    const background_style = {
-        position: 'absolute',
-        height: '100dvh',
-        width: '100dvw',
-        top: 0,
-        left: 0,
-        zIndex: '-1' 
+function Desktop({ apps, isCommandLineOpen, onCloseCommandLine }) {
+  const [backgroundPicture, setBackgroundPicture] = useState('default_bg');
+  useEffect(() => {
+    setBackgroundPicture('default_bg');
+  }, []);
+  isCommandLineOpen = false
+  const preventDragHandler = (e) => {
+    e.preventDefault();
+  };
 
-    }
+  const background_style = {
+    position: 'absolute',
+    height: '100dvh',
+    width: '100dvw',
+    top: 0,
+    left: 0,
+    zIndex: '-1',
+  };
 
   return (
     <div className='Desktop'>
@@ -27,9 +28,11 @@ function Desktop({ apps }) {
             return <DesktopApp app_name={app_name} in_docker={false} isActive={false} key={app_name}/>
         })}
 
-        <img onDragStart={preventDragHandler} style={background_style} src={`/public/${backgroundPicture}.jpg`} alt="" />
+      <img onDragStart={preventDragHandler} style={background_style} src={`/public/${backgroundPicture}.jpg`} alt="" />
+      
+      {isCommandLineOpen && <CommandLine onClose={onCloseCommandLine} />}
     </div>
-  )
+  );
 }
 
-export default Desktop
+export default Desktop;
