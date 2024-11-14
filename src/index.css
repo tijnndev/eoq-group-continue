@@ -26,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.75);
+  border: 1px solid #000;
 }
 
 .app-icon.active {
@@ -34,6 +34,7 @@
 }
 
 .app-icon img {
+  object-fit: cover;
   width: 35px;
   height: 35px;
 }
@@ -41,6 +42,51 @@
 .taskbar-clock {
   margin-right: 25px;
   font-size: 14px;
-  background-color: #000;
+  color: #000;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.75);
   padding: .5rem;
+}
+
+.command-line-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 600px;
+  background-color: black;
+  color: white;
+  border: 2px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.command-line-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #222;
+}
+
+.command-line-header button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.command-line-content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.command-line-content input {
+  margin-top: 10px;
+  padding: 5px;
+  background: #333;
+  border: none;
+  color: white;
+  width: 100%;
 }
