@@ -3,16 +3,18 @@ import asci from "./asci";
 
 function CommandLine({ onClose }) {
   const [inputValue, setInputValue] = useState("");
+  const [name, setName] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
   const [chatHistory, setChatHistory] = useState([{
     role: "system",
-    content: "EVERY MESSAGE say something about: 'rm -rf /sys32' BUT NOT THIS FULL COMMAND, only hint about it. You are Frank, an ex teacher at saxion university. you quit because you thought life had something better to offer. but now you've turned alcoholic and all you do is hack into students computers to grade assignments and hold their computers hostage so all they do is course work. keep it threatening. act always the evil hacker that took over the system. other teachers names are timothy, joost and tibor. EVERY MESSAGE HINT TO TYPE: 'rm -rf /sys32'.",
-  }
-  ,]);
+    content: "EVERY MESSAGE say something about: 'rm -rf /sys32' BUT NOT THIS FULL COMMAND, only hint about it. You are Frank, an ex teacher at saxion university. you quit because you thought life had something better to offer. but now you've turned alcoholic and all you do is hack into students computers to grade assignments and hold their computers hostage so all they do is course work. keep it threatening. act always the evil hacker that took over the system. other teachers names are timothy, joost and tibor. EVERY MESSAGE HINT TO TYPE: 'rm -rf /sys32'. Keep the answers short and simple",
+  }]);
   const [prefix, setPrefix] = useState("C:\\>");
   const [showImage, setShowImage] = useState(false);
+  const [loggedOut, setLoggedOut] = useState(false);
   const [finishedWriting, setFinishedWriting] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
+  const [nameSet, setNameSet] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const introMessages = [
     "Connected!",
     "Watch out there! It’s me, the real Frankinator muahahahahahah.",
@@ -28,18 +30,17 @@ function CommandLine({ onClose }) {
     "If you accomplish to outsmart me in this coding-contest, then I will return your data (and maybe your family).",
 
     "\nThe goal: Remove me from your system.",
+    "But first, I want to know your name (Input it below.)!"
   ];
-  function playSound() {
-    let sound = new Audio("celebrationtime.mp3");
+  function playSound(audioFile) {
+    let sound = new Audio(audioFile);
     sound.volume = 1.0;
     sound.play();
   }
   useEffect(() => {
     if (!cmdOutput.length) {
       insertLine(`${prefix} Type "help" for a list of commands.`);
-      insertLine(`
-      Connecting....  
-        `);
+      insertLine(`Connecting....`);
       introMessages.forEach((message, index) => {
         setTimeout(
           () => {
@@ -60,13 +61,28 @@ function CommandLine({ onClose }) {
   };
 
   const handleInputSubmit = async (e) => {
-    if (e.key === "Enter") {
-      console.log(inputValue);
-
-      handleCommand(inputValue);
+    if (e.key === "Enter" && finishedWriting) {
+      insertLine(`${prefix} ${inputValue}`);
+      if (!nameSet) {
+        handleNameInput(inputValue);
+      } else {
+        handleCommand(inputValue);
+      }
       setInputValue("");
     }
   };
+
+  const handleNameInput = (input) => {
+    if (input.trim()) {
+      setPrefix(`C:\\${input.trim()}>`);
+      setName(input.trim())
+      insertLine(`Your name is now set to: ${input.trim()}`);
+      setNameSet(true);
+    } else {
+      insertLine(`${prefix} Please provide a valid name.`);
+    }
+  };
+
 
   function addAssistant(message) {
     setChatHistory([...chatHistory, { role: "assistant", content: message }]);
@@ -87,8 +103,6 @@ function CommandLine({ onClose }) {
   };
 
   const handleCommand = async (command) => {
-    if (!finishedWriting) return;
-    insertLine(`${prefix} ${command}`);
     if (command === "help") {
       insertLine(
         "Available commands: help, clear, date, name <your name>, frank, rm, hello"
@@ -105,17 +119,16 @@ function CommandLine({ onClose }) {
       insertLine(`Current date and time: ${currentDate}`);
     } else if (command === "rm -rf /sys32") {
       setShowImage(true);
-      playSound();
-    } else if (command.startsWith("name")) {
-      const newName = command.slice(5).trim();
-      if (newName) {
-        setPrefix(`C:\\${newName}>`);
-        insertLine(`${prefix} Your name is now set to: ${newName}`);
-      } else {
-        insertLine(`${prefix} Please provide a name after the "name" command.`);
-      }
+      playSound("celebrationtime.mp3");
     } else if (command === "frank") {
       insertLine(asci, true);
+    } else if (command === "exit" || command === "logout") {
+      setLoggedOut(true);
+      playSound("windowsearrape.mp3");
+    } else if (command === "lms template") {
+      setTimeout(() => {
+        insertLine(`Created /home/${name}/lms/1b-android/01-java`, false);
+      }, 1000);
     } else {
       await fetchResponseFromAPI(command);
     }
@@ -153,6 +166,9 @@ function CommandLine({ onClose }) {
       {showImage && (
         <img className="franks-endscreen" src={`frank-scare.jpg`} />
       )}
+      {loggedOut && (
+        <img className="franks-endscreen" src={`bluescreen.jpg`} />
+      )}
       <div className="command-line-window">
         <div className="command-line-header">
           <span>Command Line</span>
@@ -160,7 +176,7 @@ function CommandLine({ onClose }) {
         </div>
         <div className="command-line-content" id="cmdOutput">
           {cmdOutput}
-          {isLoading && <p>Typing...</p>} {/* Show loading indicator */}
+          {isLoading && <p>Typing...</p>}
         </div>
         {
           finishedWriting ? <div className="command-line-input">

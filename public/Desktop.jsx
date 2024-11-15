@@ -38,7 +38,7 @@ function Desktop({ apps }) {
     }
 
   return (
-    <div className='Desktop'>
+    <div  className='Desktop'>
         {apps.map((app_name) =>{ 
             return <DesktopApp key={app_name} app_name={app_name} in_docker={false} isActive={false} onClick={() => handleAppClick(app_name)}  />
         })}

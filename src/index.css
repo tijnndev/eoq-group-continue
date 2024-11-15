@@ -1,3 +1,7 @@
+* {
+  user-select: none;
+}
+
 .taskbar {
   display: flex;
   justify-content: space-between;
