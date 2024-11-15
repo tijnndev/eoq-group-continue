@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import asci from "./asci";
 
-function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2 }) {
+function secondCommandLine({ setIsFrankDeleted, onClose }) {
   const [inputValue, setInputValue] = useState("");
   const [name, setName] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
@@ -29,50 +29,17 @@ function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2 }) {
   const [prefix, setPrefix] = useState("C:\\>");
   const [showImage, setShowImage] = useState(false);
   const [loggedOut, setLoggedOut] = useState(false);
-  const [finishedWriting, setFinishedWriting] = useState(false);
-  const [nameSet, setNameSet] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [finishedWriting, setFinishedWriting] = useState(true);
+  const [nameSet, setNameSet] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const introMessages = [
-    "Connected!",
-    "Watch out there! It’s me, the real Frankinator muahahahahahah.",
 
-    "Since they won’t re-hire me at Saxion, they say I drink too much, I’ve come to grade your assignments! Whether you like it or not.",
-
-    "Until you finish the course, you cannot leave.",
-
-    "I’m holding your family and all of your data hostage!",
-
-    "I have to say the code quality in these Python assignments isn’t looking too good. Haven’t I told you to use the Code Spell Checker extension before?",
-
-    "If you accomplish to outsmart me in this coding-contest, then I will return your data (and maybe your family).",
-
-    "The goal: Remove me from your system.",
-    "But first, which student is this?",
-  ];
   function playSound(audioFile) {
     let sound = new Audio(audioFile);
     sound.volume = 1.0;
     sound.play();
   }
-  useEffect(() => {
-    if (!cmdOutput.length) {
-      insertLine(`${prefix} Type "help" for a list of commands.`);
-      insertLine(`Connecting....`);
-      introMessages.forEach((message, index) => {
-        setTimeout(() => {
-          if (index) {
-            addAssistant(message);
-          }
-          insertLine(message);
-          if (index === introMessages.length - 1) {
-            setFinishedWriting(true);
-          }
-        }, (index + 1) * 2000);
-      });
-    }
-  }, []);
   
 
   const handleInputChange = (e) => {
@@ -235,16 +202,13 @@ function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2 }) {
       <div className="command-line-window">
         <div className="command-line-header">
           <span>Command Line</span>
-          <button onClick={()=>{
-            SetCommandLine2(true)
-            onClose()
-          }}>X</button>
+          <button onClick={onClose}>X</button>
         </div>
         <div className="command-line-content" id="cmdOutput">
           {cmdOutput}
           {isLoading && <p>Typing...</p>}
         </div>
-        {finishedWriting ? (
+        
           <div className="command-line-input">
             <input
               type="text"
@@ -252,15 +216,12 @@ function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2 }) {
               onChange={handleInputChange}
               onKeyDown={handleInputSubmit}
               placeholder={"Enter command..."}
-              disabled={isLoading}
             />
           </div>
-        ) : (
-          ""
-        )}
+        
       </div>
     </>
   );
 }
 
-export default CommandLine;
+export default secondCommandLine;
