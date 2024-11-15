@@ -1,7 +1,8 @@
 import React from "react";
 
-const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved  }) => {
+const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingContextMenu  }) => {
   function UpdateScreen() {
+    setShowingContextMenu(false)
     setShowUpdateScreen(true);
     setTimeout(() => {
       setShowUpdateScreen(false);
@@ -170,12 +171,12 @@ const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved  }) => {
             cursor: "pointer",
           }}
         >
-          <img
+          
+          <span><button style={{ display: "flex", textAlign: "center", backgroundColor: "transparent", color: "#000", border: "1px solid #000", padding: "5px"}} onClick={UpdateScreen}><img
             src="https://via.placeholder.com/20"
             alt="Shutdown Icon"
             style={{ marginRight: "8px" }}
-          />
-          <span><button onClick={UpdateScreen}>Update (to remove malware)</button></span>
+          />Update (to remove malware)</button></span>
         </div>
       </div>
     </div>

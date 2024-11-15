@@ -13,7 +13,7 @@ function App() {
   const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
   const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
   const [canExecuteKillCommand, setExecuteKillCommand] = useState(false);
-  const [isFrankDeleted, setIsFrankDeleted] = useState(false)
+  const [isFrankDeleted, setIsFrankDeleted] = useState(true)
   const [isMalwareRemoved, setIsMalwareRemoved] = useState(false)
   const [isShowingContextmenu, setShowingContextMenu] = useState(false)
   const [showUpdateScreen, setShowUpdateScreen] = useState(false);
@@ -42,7 +42,7 @@ function App() {
       {showUpdateScreen && <UpdateScreen />}
 
     <Desktop apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} isMalwareRemoved={isMalwareRemoved} setIsMalwareRemoved={setIsMalwareRemoved} />
-    {isShowingContextmenu && <ContextMenu setShowUpdateScreen={setShowUpdateScreen} setIsMalwareRemoved={setIsMalwareRemoved} />}
+    {isShowingContextmenu && <ContextMenu setShowUpdateScreen={setShowUpdateScreen} setIsMalwareRemoved={setIsMalwareRemoved} setShowingContextMenu={setShowingContextMenu} />}
     <Taskbar apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} canExecuteKillCommand={canExecuteKillCommand} setExecuteKillCommand={setExecuteKillCommand} isMalwareRemoved={isMalwareRemoved} setIsMalwareRemoved={setIsMalwareRemoved} />
   </>
   :<>
