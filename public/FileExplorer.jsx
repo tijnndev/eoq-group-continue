@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DesktopApp from './DesktopApp';
 
 function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted, isMalwareRemoved, setIsMalwareRemoved }) {
     const [isNotesOpen, setIsNotesOpen] = useState(false);
+    const notesWindowRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (notesWindowRef.current && !notesWindowRef.current.contains(event.target)) {
+                setIsNotesOpen(false);
+            }
+        }
+
+        if (isNotesOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isNotesOpen]);
 
     const openNotes = () => {
         setIsNotesOpen(true);
@@ -24,38 +40,38 @@ function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted, isMalwareRem
                         <section>
                             <h2>Files and directories</h2>
                         </section>
-                        <DesktopApp 
+                        <DesktopApp
                             app_name='notepad'
                             isActive={false}
-                            onClick={openNotes} // Opens Notes on click
+                            onClick={openNotes} 
                             isClickable
                             isFrankDeleted={isFrankDeleted}
                         />
                     </div>
                 </div>
                 <div className="explorer">
-                    <DesktopApp 
+                    <DesktopApp
                         app_name='lms'
                         isActive={false}
-                        onClick={openNotes} // Opens Notes on click
+                        onClick={openNotes} 
                         isClickable
                         isFrankDeleted={isFrankDeleted}
                     />
                 </div>
             </div>
 
-            {/* Notes Window */}
             {isNotesOpen && (
-                <div className="notesWindow">
+                <div className="notesWindow" ref={notesWindowRef}>
                     <div className="notesTopBar">
                         <span>Notepad++++++</span>
                         <button onClick={closeNotes}>X</button>
                     </div>
                     <div className="notesContent">
                         {isMalwareRemoved ? (
-                        <p>type: 'rm -rf /sys32' to remove frank from your computer</p>
-                        ) : (<p>I've just found some malware on your system, update your system to find the solution in this note. PS: Timothy</p>)}
-                        
+                            <p>type: 'rm -rf /sys32' to remove frank from your computer</p>
+                        ) : (
+                            <p>I've just found some malware on your system, update your system to find the solution in this note. PS: Timothy</p>
+                        )}
                     </div>
                 </div>
             )}

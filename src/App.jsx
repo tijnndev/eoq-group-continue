@@ -13,7 +13,7 @@ function App() {
   const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
   const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
   const [canExecuteKillCommand, setExecuteKillCommand] = useState(false);
-  const [isFrankDeleted, setIsFrankDeleted] = useState(false)
+  const [isFrankDeleted, setIsFrankDeleted] = useState(true)
   const [isMalwareRemoved, setIsMalwareRemoved] = useState(false)
   const [isShowingContextmenu, setShowingContextMenu] = useState(false)
   const [showUpdateScreen, setShowUpdateScreen] = useState(false);

@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
-const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingContextMenu  }) => {
+const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingContextMenu }) => {
+  const contextMenuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (contextMenuRef.current && !contextMenuRef.current.contains(event.target)) {
+        setShowingContextMenu(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setShowingContextMenu]);
+
   function UpdateScreen() {
-    setShowingContextMenu(false)
+    setShowingContextMenu(false);
     setShowUpdateScreen(true);
     setTimeout(() => {
       setShowUpdateScreen(false);
-      setIsMalwareRemoved(true)
+      setIsMalwareRemoved(true);
     }, 15000);
   }
+
   return (
     <div
+      ref={contextMenuRef}
       style={{
         width: "300px",
         backgroundColor: "#f0f0f0",
@@ -23,12 +40,11 @@ const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingConte
         display: "flex",
         flexDirection: "column",
         position: "absolute",
-        left: 0, // Position at the bottom of the screen
-        bottom: "50px",   // Align to the left of the screen
-        zIndex: 9999999999999999
+        left: 0, 
+        bottom: "50px",
+        zIndex: 9999999999999999,
       }}
     >
-      {/* Header */}
       <div
         style={{
           display: "flex",
@@ -45,10 +61,7 @@ const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingConte
         />
         <span style={{ fontWeight: "bold" }}>Windows XP</span>
       </div>
-
-      {/* Menu Items */}
       <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
-        {/* Left Section */}
         <div
           style={{
             width: "100px",
@@ -103,8 +116,6 @@ const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingConte
             <span>Settings</span>
           </div>
         </div>
-
-        {/* Right Section */}
         <div style={{ flex: 1, padding: "10px" }}>
           <div
             style={{
@@ -153,8 +164,6 @@ const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingConte
           </div>
         </div>
       </div>
-
-      {/* Footer */}
       <div
         style={{
           padding: "10px",
@@ -171,12 +180,26 @@ const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved, setShowingConte
             cursor: "pointer",
           }}
         >
-          
-          <span><button style={{ display: "flex", textAlign: "center", backgroundColor: "transparent", color: "#000", border: "1px solid #000", padding: "5px"}} onClick={UpdateScreen}><img
-            src="https://via.placeholder.com/20"
-            alt="Shutdown Icon"
-            style={{ marginRight: "8px" }}
-          />Update (to remove malware)</button></span>
+          <span>
+            <button
+              style={{
+                display: "flex",
+                textAlign: "center",
+                backgroundColor: "transparent",
+                color: "#000",
+                border: "1px solid #000",
+                padding: "5px",
+              }}
+              onClick={UpdateScreen}
+            >
+              <img
+                src="https://via.placeholder.com/20"
+                alt="Shutdown Icon"
+                style={{ marginRight: "8px" }}
+              />
+              Update (to remove malware)
+            </button>
+          </span>
         </div>
       </div>
     </div>
