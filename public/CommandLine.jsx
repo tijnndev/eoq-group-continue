@@ -183,6 +183,7 @@ function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2, canExecuteKi
     } else if (command === "lms template") {
       setTimeout(() => {
         insertLine(`Created /home/${name}/lms/1b-android/01-java`, false);
+        insertLine('Now close this tab and navigate to your File Explorer, if there open Notepad', false)
         setExecuteKillCommand(true)
       }, 1000);
 
