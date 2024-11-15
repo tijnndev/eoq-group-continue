@@ -153,6 +153,7 @@ function NewCommandLine({ setIsFrankDeleted, onClose }) {
       }, 1000);
 
       // Logic to allow the person to go to file explorer
+      setIsFrankDeleted(true)
     } else if (command == 'rm frank' || command == 'rm -rf frank') {
       insertLine('rm: Deleting Frank...')
       insertLine('rm: Operation halted.')
