@@ -134,7 +134,7 @@ function CommandLine({ setIsFrankDeleted, onClose }) {
     if (input.trim()) {
       setPrefix(`C:\\${input.trim()}>`);
       setName(input.trim());
-      insertLine(`Your name is now set to: ${input.trim()}`);
+      handleCommand(`my name is ${input.trim()}`)
       setNameSet(true);
     } else {
       insertLine(`${prefix} Please provide a valid name.`);

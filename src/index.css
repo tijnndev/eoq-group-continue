@@ -273,3 +273,14 @@
     inset -2px -2px #ffffff,
     inset 2px 2px rgb(158, 158, 158);
 }
+
+/* Black screen with sound */
+.black-screen {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
