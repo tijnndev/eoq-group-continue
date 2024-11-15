@@ -10,12 +10,12 @@ function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, set
     setBackgroundPicture("default_bg");
 
     const handleKeyDown = (e) => {
-      if (e.key === "H" || e.key === "h") {
-        setShowUpdateScreen(true);
-        setTimeout(() => {
-          setShowUpdateScreen(false);
-        }, 15000);
-      }
+      // if (e.key === "H" || e.key === "h") {
+      //   setShowUpdateScreen(true);
+      //   setTimeout(() => {
+      //     setShowUpdateScreen(false);
+      //   }, 15000);
+      // }
     };
 
     window.addEventListener("keydown", handleKeyDown);
