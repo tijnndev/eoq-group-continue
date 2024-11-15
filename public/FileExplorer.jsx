@@ -25,7 +25,7 @@ function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted }) {
                             <h2>Files and directories</h2>
                         </section>
                         <DesktopApp 
-                            app_name='lms'
+                            app_name='notepad'
                             isActive={false}
                             onClick={openNotes} // Opens Notes on click
                             isClickable

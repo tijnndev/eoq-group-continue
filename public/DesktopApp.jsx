@@ -5,7 +5,6 @@ function DesktopApp({ app_name, in_docker, isActive, onClick, isFrankDeleted }) 
 
   useEffect(() => {
     setAppData(app_name);
-    console.log(app_name == 'lms' && isFrankDeleted)
   }, [app_name]);
 
     function setImage() {

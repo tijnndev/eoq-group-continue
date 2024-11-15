@@ -15,10 +15,13 @@ function App() {
   const handleAppClick = (appName) => {
     if (appName === "cmd") {
       handleCommandLineToggle();
-    } else if (appName === "documents") {
+      setActiveApp((prevState) => (prevState === appName ? null : appName));
+    } else if (appName === "documents" && isFrankDeleted) {
       setIsFileExplorerOpen((prevState) => !prevState);
+      setActiveApp((prevState) => (prevState === appName ? null : appName));
+    } else if(appName !== "documents"){
+      setActiveApp((prevState) => (prevState === appName ? null : appName));
     }
-    setActiveApp((prevState) => (prevState === appName ? null : appName));
   };
 
   const handleCommandLineToggle = () => {
