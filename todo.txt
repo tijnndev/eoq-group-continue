@@ -8,3 +8,10 @@
 # Could do:
 - Shutdown page
 - Windows Main Context Menu
+
+
+
+- TODO:
+file explorer
+lms template
+start menu

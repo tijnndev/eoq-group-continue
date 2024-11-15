@@ -9,13 +9,14 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
 
   return (
-    loggedIn? <>
+    // loggedIn? 
+    <>
     <Desktop apps={apps} />
     <Taskbar apps={apps}/>
-  </>:
-  <>
-  <LoginScreen setLoggedIn={setLoggedIn}/>
   </>
+  // :<>
+  //   <LoginScreen setLoggedIn={setLoggedIn}/>
+  // </>
   )
 }
 
