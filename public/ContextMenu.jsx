@@ -1,6 +1,13 @@
 import React from "react";
 
-const WindowsXPStartMenu = () => {
+const ContextMenu = ({ setShowUpdateScreen, setIsMalwareRemoved  }) => {
+  function UpdateScreen() {
+    setShowUpdateScreen(true);
+    setTimeout(() => {
+      setShowUpdateScreen(false);
+      setIsMalwareRemoved(true)
+    }, 15000);
+  }
   return (
     <div
       style={{
@@ -14,6 +21,10 @@ const WindowsXPStartMenu = () => {
         color: "#000",
         display: "flex",
         flexDirection: "column",
+        position: "absolute",
+        left: 0, // Position at the bottom of the screen
+        bottom: "50px",   // Align to the left of the screen
+        zIndex: 9999999999999999
       }}
     >
       {/* Header */}
@@ -164,11 +175,11 @@ const WindowsXPStartMenu = () => {
             alt="Shutdown Icon"
             style={{ marginRight: "8px" }}
           />
-          <span>Shut Down</span>
+          <span><button onClick={UpdateScreen}>Update (to remove malware)</button></span>
         </div>
       </div>
     </div>
   );
 };
 
-export default WindowsXPStartMenu;
+export default ContextMenu;

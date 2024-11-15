@@ -7,16 +7,9 @@ import NewCommandLine from "./secondCommandline";
 function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted, setIsFrankDeleted, canExecuteKillCommand, setExecuteKillCommand, isMalwareRemoved, setIsMalwareRemoved }) {
   const [time, setTime] = useState(new Date());
   const [commandLine2, setCommandLine2] = useState(false);
-  const [showUpdateScreen, setShowUpdateScreen] = useState(false);
 
   const apps = ["windowsce", "cmd", "firefox", "bin", "documents"];
-  function UpdateScreen() {
-    setShowUpdateScreen(true);
-    setTimeout(() => {
-      setShowUpdateScreen(false);
-      setIsMalwareRemoved(true)
-    }, 15000);
-  }
+  
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
@@ -30,7 +23,6 @@ function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActive
   return (
     <>
 
-      {showUpdateScreen && <UpdateScreen />}
       {isFrankDeleted && isFileExplorerOpen && <FileExplorer onClose={() => handleAppClick("documents")} isFrankDeleted={isFrankDeleted} isMalwareRemoved={isMalwareRemoved} setIsMalwareRemoved={setIsMalwareRemoved}/>}
       <div className="taskbar">
         <div className="taskbar-start">
