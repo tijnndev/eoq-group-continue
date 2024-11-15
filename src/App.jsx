@@ -6,13 +6,28 @@ import LoginScreen from '../public/LoginScreen'
 
 function App() {
   const apps = ['firefox', 'bin', 'cmd', 'documents']
+  const [activeApp, setActiveApp] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false)
+  const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
+  const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
 
+  const handleAppClick = (appName) => {
+    if (appName === "cmd") {
+      handleCommandLineToggle();
+    } else if (appName === "documents") {
+      setIsFileExplorerOpen((prevState) => !prevState);
+    }
+    setActiveApp((prevState) => (prevState === appName ? null : appName));
+  };
+
+  const handleCommandLineToggle = () => {
+    setIsCommandLineOpen((prevState) => !prevState);
+  };
   return (
     // loggedIn? 
     <>
-    <Desktop apps={apps} />
-    <Taskbar apps={apps}/>
+    <Desktop apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} />
+    <Taskbar apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen}/>
   </>
   // :<>
     //  <LoginScreen setLoggedIn={setLoggedIn}/>

@@ -3,12 +3,9 @@ import DesktopApp from './DesktopApp';
 import CommandLine from './CommandLine';
 import FileExplorer from './FileExplorer';
 
-function Taskbar() {
+function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen  }) {
   const [time, setTime] = useState(new Date());
-  const [activeApp, setActiveApp] = useState(null);
-  const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
-  const [isFrankDeleted, setIsFrankDeleted] = useState(false)
-  const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
+  const [isFrankDeleted, setIsFrankDeleted] = useState(true)
 
   const apps = ['windowsce', 'cmd', 'firefox', 'bin', 'documents'];
 
@@ -21,19 +18,6 @@ function Taskbar() {
     hour: '2-digit',
     minute: '2-digit',
   });
-
-  const handleAppClick = (appName) => {
-    if (appName === "cmd") {
-      handleCommandLineToggle();
-    } else if (appName ==='documents') {
-      setIsFileExplorerOpen(prevState => !prevState)
-    }
-    setActiveApp(prevState => prevState === appName ? null : appName);
-  };
-
-  const handleCommandLineToggle = () => {
-    setIsCommandLineOpen(prevState => !prevState);
-  };
 
   return (
     <>
