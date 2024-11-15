@@ -8,6 +8,8 @@ function Desktop({ apps }) {
     const [backgroundPicture, setBackgroundPicture] = useState('default_bg')
     const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
     const [activeApp, setActiveApp] = useState(null);
+    const [isFrankDeleted, setIsFrankDeleted] = useState(False)
+    const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
 
     useEffect(() => {
         setBackgroundPicture('default_bg')
@@ -40,7 +42,7 @@ function Desktop({ apps }) {
 
   return (
     <>
-      <FileExplorer />
+      {isFileExplorerOpen && isFrankDeleted && <FileExplorer />}
       <div  className="Desktop">
           {apps.map((app_name) => (
               <DesktopApp
@@ -49,6 +51,7 @@ function Desktop({ apps }) {
                   in_docker={false}
                   isActive={activeApp === app_name}
                   onClick={() => handleAppClick(app_name)}
+                  isFrankDeleted={app_name == 'cmd' ? isFrankDeleted : null}
               />
           ))}
           <img onDragStart={preventDragHandler} style={background_style} src={`${backgroundPicture}.jpg`} alt="background" />
