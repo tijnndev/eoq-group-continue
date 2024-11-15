@@ -11,7 +11,7 @@ function DesktopApp({ app_name, in_docker, isActive, onClick, isFrankDeleted }) 
     setAppData('frank');
   }
 
-  const shouldTriggerOnClick = (app_name === 'notepad' && isFrankDeleted) || app_name === 'cmd' || app_name === 'documents';
+  const shouldTriggerOnClick = (app_name === 'notepad' && isFrankDeleted) || app_name === 'cmd' || (app_name === 'documents' && isFrankDeleted) ;
 
   const activeStyle = in_docker
     ? !isActive
