@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import DesktopApp from "./DesktopApp";
 import UpdateScreen from "./UpdateScreen";
 
-function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen }) {
+function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted }) {
   const [backgroundPicture, setBackgroundPicture] = useState("default_bg");
-  const [isFrankDeleted, setIsFrankDeleted] = useState(false);
   const [showUpdateScreen, setShowUpdateScreen] = useState(false);
 
   useEffect(() => {
@@ -52,6 +51,7 @@ function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, set
             in_docker={false}
             isActive={activeApp === app_name}
             onClick={() => handleAppClick(app_name)}
+            isFrankDeleted={isFrankDeleted}
           />
         ))}
         <img

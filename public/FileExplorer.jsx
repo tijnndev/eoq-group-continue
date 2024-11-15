@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DesktopApp from './DesktopApp';
 
-function FileExplorer({ onClose }) {
+function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted }) {
     const [isNotesOpen, setIsNotesOpen] = useState(false);
 
     const openNotes = () => {
@@ -29,6 +29,7 @@ function FileExplorer({ onClose }) {
                             isActive={false}
                             onClick={openNotes} // Opens Notes on click
                             isClickable
+                            isFrankDeleted={isFrankDeleted}
                         />
                     </div>
                 </div>
@@ -38,6 +39,7 @@ function FileExplorer({ onClose }) {
                         isActive={false}
                         onClick={openNotes} // Opens Notes on click
                         isClickable
+                        isFrankDeleted={isFrankDeleted}
                     />
                 </div>
             </div>
