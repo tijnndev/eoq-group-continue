@@ -4,7 +4,7 @@ import CommandLine from "./CommandLine";
 import FileExplorer from "./FileExplorer";
 import NewCommandLine from "./secondCommandline";
 
-function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted, setIsFrankDeleted  }) {
+function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted, setIsFrankDeleted, canExecuteKillCommand, setExecuteKillCommand  }) {
   const [time, setTime] = useState(new Date());
   const [commandLine2, setCommandLine2] = useState(false);
 
@@ -22,7 +22,7 @@ function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActive
 
   return (
     <>
-      {isFrankDeleted && isFileExplorerOpen && <FileExplorer isFrankDeleted={isFrankDeleted} />}
+      {isFrankDeleted && isFileExplorerOpen && <FileExplorer onClose={() => handleAppClick("documents")} isFrankDeleted={isFrankDeleted} />}
       <div className="taskbar">
         <div className="taskbar-start">
           {apps.map((app_name) => {
@@ -52,6 +52,8 @@ function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActive
                 onClose={() => handleAppClick("cmd")}
                 SetCommandLine2={setCommandLine2}
                 isFrankDeleted={isFrankDeleted}
+                canExecuteKillCommand={canExecuteKillCommand}
+                setExecuteKillCommand={setExecuteKillCommand}
               />
             )}
           </>

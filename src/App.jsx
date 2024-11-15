@@ -10,7 +10,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
   const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
-  const [isFrankDeleted, setIsFrankDeleted] = useState(false)
+  const [canExecuteKillCommand, setExecuteKillCommand] = useState(false);
+  const [isFrankDeleted, setIsFrankDeleted] = useState(true)
 
   const handleAppClick = (appName) => {
     if (appName === "cmd") {
@@ -31,7 +32,7 @@ function App() {
     loggedIn? 
     <>
     <Desktop apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} />
-    <Taskbar apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} />
+    <Taskbar apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} canExecuteKillCommand={canExecuteKillCommand} setExecuteKillCommand={setExecuteKillCommand} />
   </>
   :<>
      <LoginScreen setLoggedIn={setLoggedIn}/>

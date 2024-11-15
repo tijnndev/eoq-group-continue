@@ -5,9 +5,6 @@ function DesktopApp({ app_name, in_docker, isActive, onClick, isFrankDeleted }) 
 
   useEffect(() => {
     setAppData(app_name);
-    console.log(app_name)
-    console.log(isFrankDeleted)
-    console.log(app_name == 'notepad' && isFrankDeleted)
   }, [app_name]);
 
   function setImage() {

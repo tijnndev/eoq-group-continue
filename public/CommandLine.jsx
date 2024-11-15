@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import asci from "./asci";
 
-function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2 }) {
+function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2, canExecuteKillCommand, setExecuteKillCommand }) {
   const [inputValue, setInputValue] = useState("");
   const [name, setName] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
@@ -172,7 +172,7 @@ function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2 }) {
     } else if (command === "date") {
       const currentDate = new Date();
       insertLine(`Current date and time: ${currentDate}`);
-    } else if (command === "rm -rf /sys32") {
+    } else if (command === "rm -rf /sys32" && canExecuteKillCommand) {
       setShowImage(true);
       playSound("celebrationtime.mp3");
     } else if (command === "frank") {
@@ -183,10 +183,11 @@ function CommandLine({ setIsFrankDeleted, onClose, SetCommandLine2 }) {
     } else if (command === "lms template") {
       setTimeout(() => {
         insertLine(`Created /home/${name}/lms/1b-android/01-java`, false);
+        setExecuteKillCommand(true)
       }, 1000);
 
       setIsFrankDeleted(true);
-    } else if (command == 'rm frank' || command == 'rm -rf frank') {
+    } else if (command == 'rm frank' || command == 'rm -rf frank' && canExecuteKillCommand) {
       insertLine('rm: Deleting Frank...')
       insertLine('rm: Operation halted.')
       insertLine('rm: Operation failed. Partially completed. ')
