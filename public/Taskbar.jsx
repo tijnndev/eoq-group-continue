@@ -22,7 +22,7 @@ function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActive
 
   return (
     <>
-      {isFrankDeleted && isFileExplorerOpen && <FileExplorer />}
+      {isFrankDeleted && isFileExplorerOpen && <FileExplorer isFrankDeleted={isFrankDeleted} />}
       <div className="taskbar">
         <div className="taskbar-start">
           {apps.map((app_name) => {

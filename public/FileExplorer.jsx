@@ -5,6 +5,7 @@ function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted }) {
     const [isNotesOpen, setIsNotesOpen] = useState(false);
 
     const openNotes = () => {
+        console.log(isFrankDeleted)
         setIsNotesOpen(true);
     };
 
