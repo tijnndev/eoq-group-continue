@@ -25,14 +25,14 @@ function App() {
     setIsCommandLineOpen((prevState) => !prevState);
   };
   return (
-    // loggedIn? 
+    loggedIn? 
     <>
     <Desktop apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} />
     <Taskbar apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} />
   </>
-  // :<>
-    //  <LoginScreen setLoggedIn={setLoggedIn}/>
-  //  </>
+  :<>
+     <LoginScreen setLoggedIn={setLoggedIn}/>
+   </>
   )
 }
 

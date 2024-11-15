@@ -52,7 +52,7 @@ function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted }) {
                         <button onClick={closeNotes}>X</button>
                     </div>
                     <div className="notesContent">
-                        <p>type: 'rm rf sys32' to remove frank from your computer</p>
+                        <p>type: 'rm -rf /sys32' to remove frank from your computer</p>
                     </div>
                 </div>
             )}
