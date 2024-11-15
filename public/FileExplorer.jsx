@@ -5,7 +5,7 @@ function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted, isMalwareRem
     const [isNotesOpen, setIsNotesOpen] = useState(false);
 
     const openNotes = () => {
-        if(isMalwareRemoved) setIsNotesOpen(true);
+        setIsNotesOpen(true);
     };
 
     const closeNotes = () => {
@@ -52,7 +52,10 @@ function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted, isMalwareRem
                         <button onClick={closeNotes}>X</button>
                     </div>
                     <div className="notesContent">
+                        {isMalwareRemoved ? (
                         <p>type: 'rm -rf /sys32' to remove frank from your computer</p>
+                        ) : (<p>I've just found some malware on your system, update your system to find the solution in this note. PS: Timothy</p>)}
+                        
                     </div>
                 </div>
             )}
