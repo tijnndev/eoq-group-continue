@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import DesktopApp from './DesktopApp';
-import UpdateScreen from './UpdateScreen';
+import React, { useState, useEffect } from "react";
+import DesktopApp from "./DesktopApp";
+import UpdateScreen from "./UpdateScreen";
 
-function Desktop({ apps }) {
-  const [backgroundPicture, setBackgroundPicture] = useState('default_bg');
-  const [activeApp, setActiveApp] = useState(null);
-  const [isFrankDeleted, setIsFrankDeleted] = useState(false);
-  const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false);
+function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted }) {
+  const [backgroundPicture, setBackgroundPicture] = useState("default_bg");
   const [showUpdateScreen, setShowUpdateScreen] = useState(false);
 
   useEffect(() => {
-    setBackgroundPicture('default_bg');
+    setBackgroundPicture("default_bg");
 
     const handleKeyDown = (e) => {
-      if (e.key === 'H' || e.key === 'h') {
+      if (e.key === "H" || e.key === "h") {
         setShowUpdateScreen(true);
         setTimeout(() => {
           setShowUpdateScreen(false);
@@ -21,35 +18,30 @@ function Desktop({ apps }) {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
-  const handleAppClick = (appName) => {
-    setActiveApp((prevState) => (prevState === appName ? null : appName));
-  };
-
+  
   const preventDragHandler = (e) => {
     e.preventDefault();
   };
 
   const background_style = {
-    position: 'absolute',
-    height: '100dvh',
-    width: '100dvw',
+    position: "absolute",
+    height: "100dvh",
+    width: "100dvw",
     top: 0,
     left: 0,
-    zIndex: '-1',
+    zIndex: "-1",
   };
 
   return (
     <>
-      {showUpdateScreen && (
-        <UpdateScreen/>
-      )}
+      {showUpdateScreen && <UpdateScreen />}
 
       <div className="Desktop">
         {apps.map((app_name) => (
@@ -59,6 +51,7 @@ function Desktop({ apps }) {
             in_docker={false}
             isActive={activeApp === app_name}
             onClick={() => handleAppClick(app_name)}
+            isFrankDeleted={isFrankDeleted}
           />
         ))}
         <img

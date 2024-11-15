@@ -4,13 +4,9 @@ import CommandLine from "./CommandLine";
 import FileExplorer from "./FileExplorer";
 import NewCommandLine from "./secondCommandline";
 
-function Taskbar() {
+function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted, setIsFrankDeleted  }) {
   const [time, setTime] = useState(new Date());
-  const [activeApp, setActiveApp] = useState(null);
-  const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
-  const [isFrankDeleted, setIsFrankDeleted] = useState(false);
   const [commandLine2, setCommandLine2] = useState(false);
-  const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false);
 
   const apps = ["windowsce", "cmd", "firefox", "bin", "documents"];
 
@@ -50,6 +46,7 @@ function Taskbar() {
                 in_docker={true}
                 isActive={activeApp === app_name}
                 onClick={() => handleAppClick(app_name)}
+                isFrankDeleted={isFrankDeleted}
               />
             );
           })}
@@ -67,6 +64,7 @@ function Taskbar() {
                 setIsFrankDeleted={setIsFrankDeleted}
                 onClose={() => handleAppClick("cmd")}
                 SetCommandLine2={setCommandLine2}
+                isFrankDeleted={isFrankDeleted}
               />
             )}
           </>
