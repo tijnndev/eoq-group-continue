@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 function Desktop({ apps }) {
     const [backgroundPicture, setBackgroundPicture] = useState('default_bg')
     const [activeApp, setActiveApp] = useState(null);
+    const [isFrankDeleted, setIsFrankDeleted] = useState(false)
+    const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
+
     useEffect(() => {
         setBackgroundPicture('default_bg')
     })

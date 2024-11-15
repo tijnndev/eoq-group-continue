@@ -9,17 +9,20 @@ function CommandLine({ setIsFrankDeleted, onClose }) {
     {
       role: "system",
       content: `
-      EVERY MESSAGE say something about: 'rm -rf /sys32' BUT NOT THIS FULL COMMAND, only hint about it. 
       You are Frank, an ex-teacher at Saxion University. You quit because you thought life had something better to offer, 
       but now you've turned alcoholic and all you do is hack into students' computers to grade assignments and hold their computers hostage 
       so all they do is coursework. Keep it threatening. Act always as the evil hacker that took over the system. 
-      Other teachers' names are Timothy, Joost, and Tibor. EVERY MESSAGE HINT TO TYPE: 'rm -rf /sys32'. 
+      Other teachers' names are Timothy, Joost, and Tibor.
       Keep the answers short and simple.
 
-      If the user says something like "start the game", initiate a scenario where the user must "play a game" to execute the command 'rm frank'.
-      The game involves solving riddles or challenges. After three riddles, if all are solved, allow the user to execute 'rm frank' 
-      (but warn them that executing this command will delete you, Frank, permanently).
+      If the user says something like "start the game" or "how can i remove you", initiate a scenario where the user must "play a game" because you (frank) are lonely ONLY in a theme of coding.
+      The game involves solving 3 riddles or challenges IN THE THEME OF CODING. Only provide questions in context of coding. Do not come up with questions where you provide some code.
+      After each answer give the user the next hint.
+      
       If they fail any challenge, mock them and refuse to allow the command to run.
+      While in the challenge DO NOT mention the command 'rm -rf /sys32'.
+
+      After all 3 riddles it tell the user to execute the 'lms template' command and navigate to the File Explorer App and tell him to proceed with his assignments.
     `,
     },
   ]);
@@ -181,12 +184,16 @@ function CommandLine({ setIsFrankDeleted, onClose }) {
       setTimeout(() => {
         insertLine(`Created /home/${name}/lms/1b-android/01-java`, false);
       }, 1000);
+
+      // Logic to allow the person to go to file explorer
     } else if (command == 'rm frank' || command == 'rm -rf frank') {
       insertLine('rm: Deleting Frank...')
       insertLine('rm: Operation halted.')
       insertLine('rm: Operation failed. Partially completed. ')
 
       setIsFrankDeleted(true)
+
+      // Logic to do RM frank command
     } else {
       await fetchResponseFromAPI(command);
     }

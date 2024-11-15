@@ -77,8 +77,8 @@
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  color: #000;
-  padding: 0px 10px;
+  color: hsl(0, 0%, 0%);
+  padding: 5px 10px;
 }
 
 .command-line-header button {
@@ -87,7 +87,6 @@
   font-size: 16px;
   color: #000;
   cursor: pointer;
-  margin-top: auto;
 }
 
 .command-line-header button:hover {
@@ -99,8 +98,14 @@
   overflow-y: auto;
   flex-grow: 1;
   margin-bottom: 40px;
+  user-select: all;
+  scroll-behavior: smooth;
 }
 
+.command-line-content p {
+  user-select:auto;
+  scroll-behavior: smooth;
+}
 /* Scrollbar Styles */
 .command-line-content::-webkit-scrollbar {
   width: 12px;
