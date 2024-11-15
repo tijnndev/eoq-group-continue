@@ -11,7 +11,7 @@ function App() {
   const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
   const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
   const [canExecuteKillCommand, setExecuteKillCommand] = useState(false);
-  const [isFrankDeleted, setIsFrankDeleted] = useState(true)
+  const [isFrankDeleted, setIsFrankDeleted] = useState(false)
 
   const handleAppClick = (appName) => {
     if (appName === "cmd") {
