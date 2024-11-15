@@ -32,7 +32,7 @@ function App() {
   return (
     loggedIn? 
     <>
-    <Desktop apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} />
+    <Desktop apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} isMalwareRemoved={isMalwareRemoved} setIsMalwareRemoved={setIsMalwareRemoved} />
     <Taskbar apps={apps} isCommandLineOpen={isCommandLineOpen} setIsCommandLineOpen={setIsCommandLineOpen} activeApp={activeApp} setActiveApp={setActiveApp} handleAppClick={handleAppClick} isFileExplorerOpen={isFileExplorerOpen} isFrankDeleted={isFrankDeleted} setIsFrankDeleted={setIsFrankDeleted} canExecuteKillCommand={canExecuteKillCommand} setExecuteKillCommand={setExecuteKillCommand} isMalwareRemoved={isMalwareRemoved} setIsMalwareRemoved={setIsMalwareRemoved} />
   </>
   :<>

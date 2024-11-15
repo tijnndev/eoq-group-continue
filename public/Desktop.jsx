@@ -2,27 +2,11 @@ import React, { useState, useEffect } from "react";
 import DesktopApp from "./DesktopApp";
 import UpdateScreen from "./UpdateScreen";
 
-function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted }) {
+function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted, isMalwareRemoved, setIsMalwareRemoved }) {
   const [backgroundPicture, setBackgroundPicture] = useState("default_bg");
-  const [showUpdateScreen, setShowUpdateScreen] = useState(false);
 
   useEffect(() => {
     setBackgroundPicture("default_bg");
-
-    const handleKeyDown = (e) => {
-      // if (e.key === "H" || e.key === "h") {
-      //   setShowUpdateScreen(true);
-      //   setTimeout(() => {
-      //     setShowUpdateScreen(false);
-      //   }, 15000);
-      // }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
   }, []);
 
   
@@ -41,7 +25,6 @@ function Desktop({ apps, isCommandLineOpen, setIsCommandLineOpen, activeApp, set
 
   return (
     <>
-      {showUpdateScreen && <UpdateScreen />}
 
       <div className="Desktop">
         {apps.map((app_name) => (
