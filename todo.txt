@@ -1,6 +1,5 @@
 # Must do
-  - Implement the steps of the game
-- Windows XP Ear-rape
+- Implement the steps of the game
 
 - Be more specific in AI parameters
   - Enter tips to the AI to give when the user is stuck

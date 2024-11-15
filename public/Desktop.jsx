@@ -41,7 +41,7 @@ function Desktop({ apps }) {
   return (
     <>
       <FileExplorer />
-      <div className="Desktop">
+      <div  className="Desktop">
           {apps.map((app_name) => (
               <DesktopApp
                   key={app_name}
