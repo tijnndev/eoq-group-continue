@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DesktopApp from "./DesktopApp";
 import CommandLine from "./CommandLine";
 import FileExplorer from "./FileExplorer";
+import NewCommandLine from "./secondCommandline";
 
 function Taskbar() {
   const [time, setTime] = useState(new Date());
@@ -59,10 +60,8 @@ function Taskbar() {
         {isCommandLineOpen && (
           <>
             {commandLine2 ? (
-              <secondCommandLine
-                setIsFrankDeleted={setIsFrankDeleted}
-                onClose={() => handleAppClick("cmd")}
-              />
+              <NewCommandLine setIsFrankDeleted={setIsFrankDeleted}
+              onClose={() => handleAppClick("cmd")}/>
             ) : (
               <CommandLine
                 setIsFrankDeleted={setIsFrankDeleted}

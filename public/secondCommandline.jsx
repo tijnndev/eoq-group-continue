@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import asci from "./asci";
 
-function secondCommandLine({ setIsFrankDeleted, onClose }) {
+function NewCommandLine({ setIsFrankDeleted, onClose }) {
   const [inputValue, setInputValue] = useState("");
   const [name, setName] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
@@ -31,7 +31,7 @@ function secondCommandLine({ setIsFrankDeleted, onClose }) {
   const [loggedOut, setLoggedOut] = useState(false);
   const [finishedWriting, setFinishedWriting] = useState(true);
   const [nameSet, setNameSet] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
 
@@ -224,4 +224,4 @@ function secondCommandLine({ setIsFrankDeleted, onClose }) {
   );
 }
 
-export default secondCommandLine;
+export default NewCommandLine;
