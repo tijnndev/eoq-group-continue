@@ -21,7 +21,7 @@ function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActive
 
   return (
     <>
-    {isFrankDeleted && isFileExplorerOpen && <FileExplorer />}
+    {isFrankDeleted && isFileExplorerOpen && <FileExplorer onClose={() => handleAppClick('documents')}/>}
     <div className="taskbar">
       <div className="taskbar-start">
         {apps.map((app_name) => {
