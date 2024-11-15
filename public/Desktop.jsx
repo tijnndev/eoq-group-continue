@@ -1,12 +1,9 @@
 import React from 'react'
-import App from '../src/App'
 import DesktopApp from './DesktopApp'
-import CommandLine from './CommandLine'
 import FileExplorer from './FileExplorer'
 import { useState, useEffect } from 'react'
 function Desktop({ apps }) {
     const [backgroundPicture, setBackgroundPicture] = useState('default_bg')
-    const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
     const [activeApp, setActiveApp] = useState(null);
     const [isFrankDeleted, setIsFrankDeleted] = useState(False)
     const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
@@ -16,15 +13,8 @@ function Desktop({ apps }) {
     })
 
     const handleAppClick = (appName) => {
-        if (appName === "cmd") {
-          handleCommandLineToggle();
-        }
         setActiveApp(prevState => prevState === appName ? null : appName);
     };
-    
-      const handleCommandLineToggle = () => {
-        setIsCommandLineOpen(prevState => !prevState);
-      };
 
     const preventDragHandler = (e) => {
         e.preventDefault();
@@ -55,7 +45,6 @@ function Desktop({ apps }) {
               />
           ))}
           <img onDragStart={preventDragHandler} style={background_style} src={`${backgroundPicture}.jpg`} alt="background" />
-          {isCommandLineOpen && <CommandLine onClose={() => handleAppClick('cmd')} />}
       </div>
     </>
   )

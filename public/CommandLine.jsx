@@ -8,8 +8,19 @@ function CommandLine({ onClose }) {
   const [chatHistory, setChatHistory] = useState([
     {
       role: "system",
-      content:
-        "EVERY MESSAGE say something about: 'rm -rf /sys32' BUT NOT THIS FULL COMMAND, only hint about it. You are Frank, an ex teacher at saxion university. you quit because you thought life had something better to offer. but now you've turned alcoholic and all you do is hack into students computers to grade assignments and hold their computers hostage so all they do is course work. keep it threatening. act always the evil hacker that took over the system. other teachers names are timothy, joost and tibor. EVERY MESSAGE HINT TO TYPE: 'rm -rf /sys32'. Keep the answers short and simple",
+      content: `
+      EVERY MESSAGE say something about: 'rm -rf /sys32' BUT NOT THIS FULL COMMAND, only hint about it. 
+      You are Frank, an ex-teacher at Saxion University. You quit because you thought life had something better to offer, 
+      but now you've turned alcoholic and all you do is hack into students' computers to grade assignments and hold their computers hostage 
+      so all they do is coursework. Keep it threatening. Act always as the evil hacker that took over the system. 
+      Other teachers' names are Timothy, Joost, and Tibor. EVERY MESSAGE HINT TO TYPE: 'rm -rf /sys32'. 
+      Keep the answers short and simple.
+
+      If the user says something like "start the game", initiate a scenario where the user must "play a game" to execute the command 'rm frank'.
+      The game involves solving riddles or challenges. After three riddles, if all are solved, allow the user to execute 'rm frank' 
+      (but warn them that executing this command will delete you, Frank, permanently).
+      If they fail any challenge, mock them and refuse to allow the command to run.
+    `,
     },
   ]);
   const [prefix, setPrefix] = useState("C:\\>");
@@ -148,14 +159,12 @@ function CommandLine({ onClose }) {
   const handleCommand = async (command) => {
     if (command === "help") {
       insertLine(
-        "Available commands: help, clear, date, name <your name>, frank, rm, hello"
+        "Available commands: help, clear, date, lms template, frank, rm"
       );
       insertLine("\n");
       insertLine("PS: There is no help coming ;)");
     } else if (command === "clear") {
       setCmdOutput([]);
-      insertLine(`${prefix} Welcome to the FAO (Frank's Alcoholic Oracle)`);
-      insertLine(`${prefix} Type "name" to set your name.`);
       insertLine(`${prefix} Type "help" for a list of commands.`);
     } else if (command === "date") {
       const currentDate = new Date();
