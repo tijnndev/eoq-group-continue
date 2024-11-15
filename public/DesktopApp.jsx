@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function DesktopApp({ app_name, in_docker, isActive, onClick }) {
+function DesktopApp({ app_name, in_docker, isActive, onClick, isClickable }) {
   const [appData, setAppData] = useState('');
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function DesktopApp({ app_name, in_docker, isActive, onClick }) {
     <div 
       style={activeStyle} 
       className="app-icon appPadding flex flexColumn gap1rem" 
-      onClick={app_name == 'cmd' || app_name == 'documents' ? () => {onClick()} : () => {setImage()}}
+      onClick={app_name == 'cmd' || app_name == 'documents' ? () => onClick() : isClickable ? () => onClick() : () => {setImage()}}
     >
       <img src={`app_img_${appData}.jpg`} alt={`app_img_${appData}.jpg`} />
       {!in_docker && <p>{appData}</p>}

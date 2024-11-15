@@ -7,7 +7,6 @@ function Taskbar() {
   const [time, setTime] = useState(new Date());
   const [activeApp, setActiveApp] = useState(null);
   const [isCommandLineOpen, setIsCommandLineOpen] = useState(false);
-
   const [isFrankDeleted, setIsFrankDeleted] = useState(false)
   const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
 
