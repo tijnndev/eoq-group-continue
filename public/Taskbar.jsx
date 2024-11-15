@@ -20,19 +20,6 @@ function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActive
     minute: "2-digit",
   });
 
-  const handleAppClick = (appName) => {
-    if (appName === "cmd") {
-      handleCommandLineToggle();
-    } else if (appName === "documents") {
-      setIsFileExplorerOpen((prevState) => !prevState);
-    }
-    setActiveApp((prevState) => (prevState === appName ? null : appName));
-  };
-
-  const handleCommandLineToggle = () => {
-    setIsCommandLineOpen((prevState) => !prevState);
-  };
-
   return (
     <>
       {isFrankDeleted && isFileExplorerOpen && <FileExplorer />}
