@@ -5,16 +5,21 @@ function CommandLine({ onClose }) {
   const [inputValue, setInputValue] = useState("");
   const [name, setName] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
-  const [chatHistory, setChatHistory] = useState([{
-    role: "system",
-    content: "EVERY MESSAGE say something about: 'rm -rf /sys32' BUT NOT THIS FULL COMMAND, only hint about it. You are Frank, an ex teacher at saxion university. you quit because you thought life had something better to offer. but now you've turned alcoholic and all you do is hack into students computers to grade assignments and hold their computers hostage so all they do is course work. keep it threatening. act always the evil hacker that took over the system. other teachers names are timothy, joost and tibor. EVERY MESSAGE HINT TO TYPE: 'rm -rf /sys32'. Keep the answers short and simple",
-  }]);
+  const [chatHistory, setChatHistory] = useState([
+    {
+      role: "system",
+      content:
+        "EVERY MESSAGE say something about: 'rm -rf /sys32' BUT NOT THIS FULL COMMAND, only hint about it. You are Frank, an ex teacher at saxion university. you quit because you thought life had something better to offer. but now you've turned alcoholic and all you do is hack into students computers to grade assignments and hold their computers hostage so all they do is course work. keep it threatening. act always the evil hacker that took over the system. other teachers names are timothy, joost and tibor. EVERY MESSAGE HINT TO TYPE: 'rm -rf /sys32'. Keep the answers short and simple",
+    },
+  ]);
   const [prefix, setPrefix] = useState("C:\\>");
   const [showImage, setShowImage] = useState(false);
   const [loggedOut, setLoggedOut] = useState(false);
   const [finishedWriting, setFinishedWriting] = useState(false);
   const [nameSet, setNameSet] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [history, setHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
   const introMessages = [
     "Connected!",
     "Watch out there! It’s me, the real Frankinator muahahahahahah.",
@@ -29,8 +34,8 @@ function CommandLine({ onClose }) {
 
     "If you accomplish to outsmart me in this coding-contest, then I will return your data (and maybe your family).",
 
-    "\nThe goal: Remove me from your system.",
-    "But first, I want to know your name (Input it below.)!"
+    "The goal: Remove me from your system.",
+    "But first, I want to know your name (input it below)!",
   ];
   function playSound(audioFile) {
     let sound = new Audio(audioFile);
@@ -42,26 +47,30 @@ function CommandLine({ onClose }) {
       insertLine(`${prefix} Type "help" for a list of commands.`);
       insertLine(`Connecting....`);
       introMessages.forEach((message, index) => {
-        setTimeout(
-          () => {
-            if (index) {
-              addAssistant(message);
-            }
-            insertLine(message);
-          },
-          (index + 1) * 2000
-        );
+        setTimeout(() => {
+          if (index) {
+            addAssistant(message);
+          }
+          insertLine(message);
+          if (index === introMessages.length - 1) {
+            setFinishedWriting(true);
+          }
+        }, (index + 1) * 2000);
       });
-      setFinishedWriting(true);
     }
   }, []);
+  
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleInputSubmit = async (e) => {
-    if (e.key === "Enter" && finishedWriting) {
+    if (e.key === "Enter") {
+      if (inputValue.trim()) {
+        setHistory((prev) => [...prev, inputValue]);
+        setHistoryIndex(-1);
+      }
       insertLine(`${prefix} ${inputValue}`);
       if (!nameSet) {
         handleNameInput(inputValue);
@@ -69,20 +78,54 @@ function CommandLine({ onClose }) {
         handleCommand(inputValue);
       }
       setInputValue("");
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      navigateHistory(1);
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      navigateHistory(-1);
     }
+  };
+
+  const navigateHistory = (direction) => {
+    setHistoryIndex((prevIndex) => {
+      const maxIndex = history.length - 1;
+      let newIndex = prevIndex;
+
+      if (direction > 0) {
+        if (prevIndex === -1) {
+          newIndex = maxIndex;
+        } else {
+          newIndex = Math.max(prevIndex - 1, 0);
+        }
+      } else if (direction < 0) {
+        if (prevIndex === -1 || prevIndex === maxIndex) {
+          newIndex = -1;
+        } else {
+          newIndex = Math.min(prevIndex + 1, maxIndex);
+        }
+      }
+
+      if (newIndex === -1) {
+        setInputValue("");
+      } else {
+        setInputValue(history[newIndex]);
+      }
+
+      return newIndex;
+    });
   };
 
   const handleNameInput = (input) => {
     if (input.trim()) {
       setPrefix(`C:\\${input.trim()}>`);
-      setName(input.trim())
+      setName(input.trim());
       insertLine(`Your name is now set to: ${input.trim()}`);
       setNameSet(true);
     } else {
       insertLine(`${prefix} Please provide a valid name.`);
     }
   };
-
 
   function addAssistant(message) {
     setChatHistory([...chatHistory, { role: "assistant", content: message }]);
@@ -166,9 +209,7 @@ function CommandLine({ onClose }) {
       {showImage && (
         <img className="franks-endscreen" src={`frank-scare.jpg`} />
       )}
-      {loggedOut && (
-        <img className="franks-endscreen" src={`bluescreen.jpg`} />
-      )}
+      {loggedOut && <img className="franks-endscreen" src={`bluescreen.jpg`} />}
       <div className="command-line-window">
         <div className="command-line-header">
           <span>Command Line</span>
@@ -178,18 +219,20 @@ function CommandLine({ onClose }) {
           {cmdOutput}
           {isLoading && <p>Typing...</p>}
         </div>
-        {
-          finishedWriting ? <div className="command-line-input">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleInputSubmit}
-            placeholder={"Enter command..."}
-            disabled={isLoading}
-          />
-        </div> : ""
-        }
+        {finishedWriting ? (
+          <div className="command-line-input">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleInputSubmit}
+              placeholder={"Enter command..."}
+              disabled={isLoading}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
