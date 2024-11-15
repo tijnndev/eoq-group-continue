@@ -1,13 +1,9 @@
 import React from 'react'
 import DesktopApp from './DesktopApp'
-import FileExplorer from './FileExplorer'
 import { useState, useEffect } from 'react'
 function Desktop({ apps }) {
     const [backgroundPicture, setBackgroundPicture] = useState('default_bg')
     const [activeApp, setActiveApp] = useState(null);
-    const [isFrankDeleted, setIsFrankDeleted] = useState(False)
-    const [isFileExplorerOpen, setIsFileExplorerOpen] = useState(false)
-
     useEffect(() => {
         setBackgroundPicture('default_bg')
     })
@@ -19,7 +15,7 @@ function Desktop({ apps }) {
     const preventDragHandler = (e) => {
         e.preventDefault();
       }
-      
+
     const background_style = {
         position: 'absolute',
         height: '100dvh',
@@ -32,7 +28,6 @@ function Desktop({ apps }) {
 
   return (
     <>
-      {isFileExplorerOpen && isFrankDeleted && <FileExplorer />}
       <div  className="Desktop">
           {apps.map((app_name) => (
               <DesktopApp
@@ -41,7 +36,6 @@ function Desktop({ apps }) {
                   in_docker={false}
                   isActive={activeApp === app_name}
                   onClick={() => handleAppClick(app_name)}
-                  isFrankDeleted={app_name == 'cmd' ? isFrankDeleted : null}
               />
           ))}
           <img onDragStart={preventDragHandler} style={background_style} src={`${backgroundPicture}.jpg`} alt="background" />

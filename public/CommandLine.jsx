@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import asci from "./asci";
 
-function CommandLine({ onClose }) {
+function CommandLine({ setIsFrankDeleted, onClose }) {
   const [inputValue, setInputValue] = useState("");
   const [name, setName] = useState("");
   const [cmdOutput, setCmdOutput] = useState([]);
@@ -46,7 +46,7 @@ function CommandLine({ onClose }) {
     "If you accomplish to outsmart me in this coding-contest, then I will return your data (and maybe your family).",
 
     "The goal: Remove me from your system.",
-    "But first, I want to know your name (input it below)!",
+    "But first, which student is this?",
   ];
   function playSound(audioFile) {
     let sound = new Audio(audioFile);
@@ -181,6 +181,12 @@ function CommandLine({ onClose }) {
       setTimeout(() => {
         insertLine(`Created /home/${name}/lms/1b-android/01-java`, false);
       }, 1000);
+    } else if (command == 'rm frank' || command == 'rm -rf frank') {
+      insertLine('rm: Deleting Frank...')
+      insertLine('rm: Operation halted.')
+      insertLine('rm: Operation failed. Partially completed. ')
+
+      setIsFrankDeleted(true)
     } else {
       await fetchResponseFromAPI(command);
     }
