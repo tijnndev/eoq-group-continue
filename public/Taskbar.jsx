@@ -4,7 +4,7 @@ import CommandLine from "./CommandLine";
 import FileExplorer from "./FileExplorer";
 import NewCommandLine from "./secondCommandline";
 
-function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted, setIsFrankDeleted, canExecuteKillCommand, setExecuteKillCommand  }) {
+function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActiveApp, handleAppClick, isFileExplorerOpen, isFrankDeleted, setIsFrankDeleted, canExecuteKillCommand, setExecuteKillCommand, isMalwareRemoved, setIsMalwareRemoved }) {
   const [time, setTime] = useState(new Date());
   const [commandLine2, setCommandLine2] = useState(false);
 
@@ -22,7 +22,7 @@ function Taskbar({ isCommandLineOpen, setIsCommandLineOpen, activeApp, setActive
 
   return (
     <>
-      {isFrankDeleted && isFileExplorerOpen && <FileExplorer onClose={() => handleAppClick("documents")} isFrankDeleted={isFrankDeleted} />}
+      {isFrankDeleted && isFileExplorerOpen && <FileExplorer onClose={() => handleAppClick("documents")} isFrankDeleted={isFrankDeleted} isMalwareRemoved={isMalwareRemoved} setIsMalwareRemoved={setIsMalwareRemoved}/>}
       <div className="taskbar">
         <div className="taskbar-start">
           {apps.map((app_name) => {

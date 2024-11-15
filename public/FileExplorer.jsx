@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import DesktopApp from './DesktopApp';
 
-function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted }) {
+function FileExplorer({ onClose, setIsFrankDeleted, isFrankDeleted, isMalwareRemoved, setIsMalwareRemoved }) {
     const [isNotesOpen, setIsNotesOpen] = useState(false);
 
     const openNotes = () => {
-        setIsNotesOpen(true);
+        if(isMalwareRemoved) setIsNotesOpen(true);
     };
 
     const closeNotes = () => {
