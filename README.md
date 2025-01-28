@@ -2,6 +2,11 @@
 
 This project is a modern recreation of Windows XP, built as part of a school assignment. The frontend is powered by React, while the backend leverages Flask to handle API requests and serve data. Together, this project brings the nostalgic experience of Windows XP into a web-based application.
 
+Main Coders:
+- Lajos
+- Tal
+- Tijn
+
 ## Table of Contents
 - [About the Project](#about-the-project)
 - [Technologies Used](#technologies-used)
