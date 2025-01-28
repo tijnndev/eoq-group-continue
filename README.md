@@ -45,8 +45,8 @@ This project was created by a team of three students to fulfill a school assignm
 ### Steps:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/windows-xp-clone.git
-   cd windows-xp-clone
+   git clone https://github.com/tijnndev/eoq-group-continue.git
+   cd eoq-group-continue
    ```
 
 2. Set up the frontend:
